@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ship-service
+    version: 1.0.0-SNAPSHOT
+    description: Ship service provides the facility to add, update, remove and view the ship details on request
+  jpa:
+    showSql: true
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:file:~/ship-db
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+
+info:
+  appName: ${spring.application.name}
+  descripton: ${spring.application.description}
+  version: ${spring.application.version}

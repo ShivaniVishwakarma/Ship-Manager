@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="panel">
+    <br/>
+    <div class="panel-header">
+      <span class="panel-title"> <h2>Ship List</h2></span>
+    </div>
+    <br/>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-stripped table-responsive table-bordered">
+            <thead>
+            <th> Ship Code </th>
+            <th> Ship Name </th>
+            <th> Ship Length (in mts) </th>
+            <th> Ship Width (in mts) </th>
+            <th> </th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ship of ships">
+              <td>{{ship.shipCode}} </td>
+              <td>{{ship.shipName}} </td>
+              <td>{{ship.shipLengthInMeters}} </td>
+              <td>{{ship.shipWidthInMeters}} </td>
+              <td>
+                <button class="btn btn-sm btn-primary" (click)="editShip(ship.shipCode)"> Edit
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="deleteShip(ship.shipCode)"> Delete
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
