@@ -12,7 +12,7 @@ export class ShipService {
 
   private apiServerUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getAllShips() : Observable<Ship[]>{
     return this.http.get<Ship[]>(`${this.apiServerUrl}/getall`)

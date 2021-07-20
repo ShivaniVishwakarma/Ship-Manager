@@ -10,6 +10,7 @@ spring:
     showSql: true
     hibernate:
       ddl-auto: update
+    generate-ddl: true
   h2:
     console:
       enabled: true
@@ -19,6 +20,9 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
+  sql:
+    init:
+      mode: always
 
 info:
   appName: ${spring.application.name}

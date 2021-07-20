@@ -8,11 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class ShipService {
+
+    @Autowired
+    Map<Integer,String> codes;
+
 
     @Autowired
     ShipRepository shipRepository;
@@ -22,8 +26,13 @@ public class ShipService {
         Optional<Ship> s = shipRepository.findByShipCode(ship.getShipCode());
 
         if (!s.isPresent()) {
-            Ship s1 = shipRepository.save(ship);
-            generateShipCode(1);
+            Ship newShip = shipRepository.save(ship);
+            String code = generateShipCode(newShip.getId());
+            Optional<Ship> s1 = shipRepository.findById(newShip.getId());
+            newShip.setShipCode(code);
+            if(s1.isPresent()) {
+                shipRepository.save(newShip);
+            }
             response.setMessage("Ship Added Successfully");
             response.setStatus(true);
         } else {
@@ -67,40 +76,25 @@ public class ShipService {
         return ResponseEntity.ok(response);
     }
 
-    public void generateShipCode(Integer ide){
-        int id = 20;
+
+    public String generateShipCode(Integer id){
+      //  int id = 2;
         int max = 18;
-        HashMap<Integer, String> keys = new HashMap<>();
-        keys.put(1,"A1");
-        keys.put(2,"A2");
-        keys.put(3,"A3");
-        keys.put(4,"A4");
-        keys.put(5,"A5");
-        keys.put(6,"A6");
-        keys.put(7,"A7");
-        keys.put(8,"A8");
-        keys.put(9,"A9");
-        keys.put(10,"B1");
-        keys.put(11,"B2");
-        keys.put(12,"B3");
-        keys.put(13,"B4");
-        keys.put(14,"B5");
-        keys.put(15,"B6");
-        keys.put(16,"B7");
-        keys.put(17,"B8");
-        keys.put(18,"B9");
 
-        int i  = (Integer) (id/max) + 1000;
-        System.out.println("i - " + i);
+        //test to chk duplicates - Executor service
 
-        int temp = id%max;
-        System.out.println("temp - " + temp);
+        int i  = (Integer) (id/max) + 1000; //alternate of division operator
+        //System.out.println("i - " + i);
 
-        String c = keys.get(temp);
-        System.out.println("c - " + c);
+        int temp = id%max; //alternative
+        //System.out.println("temp - " + temp);
+
+        String c = codes.get(temp);
+       // System.out.println("c - " + c);
 
         String key = "SHIP-" + i + "-" + c;
         System.out.println("Shipcode - " + key);
+        return key;
     }
 }
 

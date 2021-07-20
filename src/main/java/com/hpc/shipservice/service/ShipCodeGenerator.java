@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ShipIdGenerator implements IdentifierGenerator{
+public class ShipCodeGenerator implements IdentifierGenerator{
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {

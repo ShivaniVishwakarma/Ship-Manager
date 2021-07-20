@@ -10,6 +10,7 @@
         <div class="col-md-12">
           <table class="table table-stripped table-responsive table-bordered">
             <thead>
+            <th> Id </th>
             <th> Ship Code </th>
             <th> Ship Name </th>
             <th> Ship Length (in mts) </th>
@@ -18,6 +19,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let ship of ships">
+              <td>{{ship.id}} </td>
               <td>{{ship.shipCode}} </td>
               <td>{{ship.shipName}} </td>
               <td>{{ship.shipLengthInMeters}} </td>

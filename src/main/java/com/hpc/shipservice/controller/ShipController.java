@@ -24,6 +24,7 @@ public class ShipController {
 
     //Fetch all ships info
     @GetMapping("/getall")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public Collection<Ship> getShips() {
         return shipService.getShips();
     }
