@@ -1,24 +1,21 @@
 package com.hpc.shipservice.service;
 
-import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.IdentifierGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Map;
 
-public class ShipCodeGenerator implements IdentifierGenerator{
+@Service
+public class ShipCodeGenerator {
 
-    @Override
-    public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+    @Autowired
+    Map<Integer,String> codes;
 
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-MM-mm-ss");
-            return simpleDateFormat.format(new Date());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public String generateShipCode(Integer id){
+
+        int max = 18; //234
+        int i  = (Integer) (id/max) + 1000; //alternate of division operator
+        String c = codes.get(id%max);
+        return "SHIP-" + i + "-" + c;
     }
 }

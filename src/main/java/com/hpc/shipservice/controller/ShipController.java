@@ -46,4 +46,10 @@ public class ShipController {
     public ResponseEntity<?> deleteShipInfo(@PathVariable("shipCode") String shipCode){
         return shipService.deleteShipInfo(shipCode);
     }
+
+    //Login
+    @PostMapping("/login/{username}/{password}")
+    public ResponseEntity<?> login(@PathVariable("username") String username, @PathVariable("password") String password ){
+        return shipService.login(username,password);
+    }
 }

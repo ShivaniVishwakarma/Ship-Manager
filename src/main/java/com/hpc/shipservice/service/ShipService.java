@@ -1,25 +1,28 @@
 package com.hpc.shipservice.service;
 
 import com.hpc.shipservice.entity.Ship;
+import com.hpc.shipservice.entity.User;
 import com.hpc.shipservice.models.Response;
 import com.hpc.shipservice.repository.ShipRepository;
+import com.hpc.shipservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class ShipService {
 
     @Autowired
-    Map<Integer,String> codes;
-
+    ShipCodeGenerator shipCodeGenerator;
 
     @Autowired
     ShipRepository shipRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     public ResponseEntity<Response> addNewShipInfo(Ship ship){
         Response response = new Response();
@@ -27,7 +30,7 @@ public class ShipService {
 
         if (!s.isPresent()) {
             Ship newShip = shipRepository.save(ship);
-            String code = generateShipCode(newShip.getId());
+            String code = shipCodeGenerator.generateShipCode(newShip.getId());
             Optional<Ship> s1 = shipRepository.findById(newShip.getId());
             newShip.setShipCode(code);
             if(s1.isPresent()) {
@@ -53,8 +56,7 @@ public class ShipService {
         Response response = new Response();
         Optional<Ship> s = shipRepository.findByShipCode(ship.getShipCode());
         if (s.isPresent()) {
-            Ship savedShip = shipRepository.save(ship);
-
+            shipRepository.save(ship);
             response.setMessage("Ship Updated Successfully");
             response.setStatus(true);
         } else {
@@ -76,25 +78,19 @@ public class ShipService {
         return ResponseEntity.ok(response);
     }
 
+    public ResponseEntity<?> login(String username, String password) {
+        Response response = new Response();
 
-    public String generateShipCode(Integer id){
-      //  int id = 2;
-        int max = 18;
+        Optional<User> user = userRepository.getUserByUsername(username);
 
-        //test to chk duplicates - Executor service
-
-        int i  = (Integer) (id/max) + 1000; //alternate of division operator
-        //System.out.println("i - " + i);
-
-        int temp = id%max; //alternative
-        //System.out.println("temp - " + temp);
-
-        String c = codes.get(temp);
-       // System.out.println("c - " + c);
-
-        String key = "SHIP-" + i + "-" + c;
-        System.out.println("Shipcode - " + key);
-        return key;
+        if(!user.isPresent()){
+            response.setMessage("Username does not exist");
+        }else if(!user.get().getPassword().equals(password)){
+            response.setMessage("Password incorrect");
+        }else{
+            response.setMessage("Login successful");
+        }
+        return ResponseEntity.ok(response);
     }
 }
 
