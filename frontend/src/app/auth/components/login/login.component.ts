@@ -7,6 +7,8 @@ import { Constants } from '../../../core/constants';
 
 import { StorageService } from '../../../core/services/storage.service';
 import { AuthService } from '../../services/auth.service';
+import {Ship} from "../../../ship/ship.model";
+import {User} from "../../user.model";
 
 
 @Component({
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
     private toasterService: ToastrService
   ) {
     this.authForm = this.fb.group({
-      username: '',
+      username: [''],
       password: ['']
     });
   }
@@ -35,10 +37,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   login(authForm: FormGroup) {
     if (authForm.valid) {
-      this.authService.login(authForm.value.username, authForm.value.password)
+      let user: User = authForm.value;
+      this.authService.login(user)
         .subscribe(response => {
           if (response.status) {
             alert(response.message);
@@ -55,6 +57,7 @@ export class LoginComponent implements OnInit {
       alert("Please fill form, something is missing or invalid");
     }
   }
+
 
   updateToken(data: any) {
     this.storageService.setAccessToken('token');

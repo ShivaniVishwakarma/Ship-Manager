@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 
 spring:
   application:
@@ -20,9 +20,9 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
-  sql:
-    init:
-      mode: always
+#  sql:
+ #   init:
+  #    mode: always
 
 info:
   appName: ${spring.application.name}

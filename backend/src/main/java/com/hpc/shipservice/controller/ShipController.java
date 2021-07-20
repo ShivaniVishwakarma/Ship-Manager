@@ -1,6 +1,7 @@
 package com.hpc.shipservice.controller;
 
 import com.hpc.shipservice.entity.Ship;
+import com.hpc.shipservice.entity.User;
 import com.hpc.shipservice.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,9 +48,9 @@ public class ShipController {
         return shipService.deleteShipInfo(shipCode);
     }
 
-    //Login
-    @PostMapping("/login/{username}/{password}")
-    public ResponseEntity<?> login(@PathVariable("username") String username, @PathVariable("password") String password ){
-        return shipService.login(username,password);
+    //Login authentication
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> authenticate(@RequestBody User user ){
+        return shipService.authenticate(user);
     }
 }

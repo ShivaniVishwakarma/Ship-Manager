@@ -78,19 +78,21 @@ public class ShipService {
         return ResponseEntity.ok(response);
     }
 
-    public ResponseEntity<?> login(String username, String password) {
+    public ResponseEntity<?> authenticate(User u) {
         Response response = new Response();
-
-        Optional<User> user = userRepository.getUserByUsername(username);
-
+        Optional<User> user = userRepository.getUserByUsername(u.getUsername());
         if(!user.isPresent()){
             response.setMessage("Username does not exist");
-        }else if(!user.get().getPassword().equals(password)){
+        }else if(!user.get().getPassword().equals(u.getPassword())){
             response.setMessage("Password incorrect");
         }else{
             response.setMessage("Login successful");
+            generateToken(user.get());
         }
         return ResponseEntity.ok(response);
+    }
+
+    private void generateToken(User user) {
     }
 }
 

@@ -7,32 +7,33 @@ import { Ship } from "../ship.model";
 
 import Page from "./../../models/page.model";
 import { Response } from "./../../utils/response.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ShipService {
-  //baseUrl = 'http://localhost:8080/api';
-  baseUrl: string = 'http://localhost:9000/api/v1';
+
+  private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {
   }
 
   getShipList(page: Page): Observable<Ship[]> {
-    return this.http.get<Ship[]>(`${this.baseUrl}/products?pageNumber=${page.pageNumber}&recordsPerPage=${page.recordsPerPage}&search=${page.search}`);
+    return this.http.get<Ship[]>(`${this.apiServerUrl}/getall?pageNumber=${page.pageNumber}&recordsPerPage=${page.recordsPerPage}&search=${page.search}`);
   }
 
   getShip(shipCode: string): Observable<Response> {
-    return this.http.get<Response>(`${this.baseUrl}/ships/${shipCode}`);
+    return this.http.get<Response>(`${this.apiServerUrl}/get/${shipCode}`);
   }
 
   addShip(ship: Ship): Observable<Response> {
-    return this.http.post<Response>(`${this.baseUrl}/ships`, ship);
+    return this.http.post<Response>(`${this.apiServerUrl}/add`, ship);
   }
 
   editShip(ship: Ship): Observable<Response> {
-    return this.http.put<Response>(`${this.baseUrl}/ships`, ship);
+    return this.http.put<Response>(`${this.apiServerUrl}/update`, ship);
   }
 
   deleteShip(shipCode: string): Observable<Response> {
-    return this.http.delete<Response>(`${this.baseUrl}/ships/${shipCode}`);
+    return this.http.delete<Response>(`${this.apiServerUrl}/delete/${shipCode}`);
   }
 }
