@@ -1,0 +1,45 @@
+<div class="panel-default">
+    <div class="panel-header">
+        <span class="panel-title"> Add New Ship</span>
+    </div>
+    <div class="panel-body">
+        <form [formGroup]="shipForm" (ngSubmit)="saveShip(shipForm)" novalidate>
+
+            <div class="row form-group">
+                <div class="col-md-4"><label for="code" class="field-label text-muted">Ship Code</label></div>
+                <div class="col-md-8">
+                    <input type="text" name="code" id="code" formControlName="code" class="form-control"
+                        placeholder="Enter Ship Code" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><label for="name" class="field-label text-muted">Name</label></div>
+                <div class="col-md-8">
+                    <input type="text" name="name" id="name" formControlName="name" class="form-control"
+                        placeholder="Enter Name" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><label for="length" class="field-label text-muted">Length In Meters</label></div>
+                <div class="col-md-8">
+                    <input type="number" name="length" id="length" formControlName="length" class="form-control"
+                        placeholder="Enter Length" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4"><label for="width" class="field-label text-muted">Width In Meters</label></div>
+                <div class="col-md-8">
+                    <input type="number" name="width" id="width" formControlName="width" class="form-control"
+                        placeholder="Enter Width" />
+                </div>
+            </div>
+
+            <div class="row col-md-3 center">
+                <button class="btn btn-primary" type="submit"> Submit </button>
+            </div>
+        </form>
+    </div>
+</div>
