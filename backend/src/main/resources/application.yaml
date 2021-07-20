@@ -7,7 +7,7 @@ spring:
     version: 1.0.0-SNAPSHOT
     description: Ship service provides the facility to add, update, remove and view the ship details on request
   jpa:
-    showSql: true
+    showSql: false
     hibernate:
       ddl-auto: update
     generate-ddl: true
@@ -20,9 +20,10 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
-#  sql:
- #   init:
-  #    mode: always
+
+
+jwt:
+  secret: admin
 
 info:
   appName: ${spring.application.name}

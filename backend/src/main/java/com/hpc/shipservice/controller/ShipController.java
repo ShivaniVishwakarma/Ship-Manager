@@ -1,7 +1,7 @@
 package com.hpc.shipservice.controller;
 
 import com.hpc.shipservice.entity.Ship;
-import com.hpc.shipservice.entity.User;
+import com.hpc.shipservice.models.AuthenticationRequest;
 import com.hpc.shipservice.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +50,8 @@ public class ShipController {
 
     //Login authentication
     @PostMapping("/authenticate")
-    public ResponseEntity<?> authenticate(@RequestBody User user ){
-        return shipService.authenticate(user);
+    public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest ){
+        return shipService.authenticate(authenticationRequest);
     }
+
 }

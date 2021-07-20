@@ -2,11 +2,18 @@ package com.hpc.shipservice.service;
 
 import com.hpc.shipservice.entity.Ship;
 import com.hpc.shipservice.entity.User;
+import com.hpc.shipservice.models.AuthenticationRequest;
+import com.hpc.shipservice.models.AuthenticationResponse;
 import com.hpc.shipservice.models.Response;
 import com.hpc.shipservice.repository.ShipRepository;
 import com.hpc.shipservice.repository.UserRepository;
+import com.hpc.shipservice.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -23,6 +30,15 @@ public class ShipService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
 
     public ResponseEntity<Response> addNewShipInfo(Ship ship){
         Response response = new Response();
@@ -78,21 +94,26 @@ public class ShipService {
         return ResponseEntity.ok(response);
     }
 
-    public ResponseEntity<?> authenticate(User u) {
+    public ResponseEntity<?> authenticate(AuthenticationRequest u) {
         Response response = new Response();
+        String jwt = null;
         Optional<User> user = userRepository.getUserByUsername(u.getUsername());
         if(!user.isPresent()){
             response.setMessage("Username does not exist");
         }else if(!user.get().getPassword().equals(u.getPassword())){
             response.setMessage("Password incorrect");
         }else{
-            response.setMessage("Login successful");
-            generateToken(user.get());
+            try {
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(u.getUsername(), u.getPassword()));
+            }catch(BadCredentialsException e){
+                e.printStackTrace();
+            }
+            UserDetails userDetails = userDetailsService.loadUserByUsername(u.getUsername());
+            jwt = jwtTokenUtil.generateToken(userDetails);
         }
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
-    private void generateToken(User user) {
-    }
+
 }
 
