@@ -17,7 +17,11 @@ export class AuthService {
     }
 
     login(user: User): Observable<Response> {
-      return this.http.post<Response>(`${this.apiServerUrl}/login`, user);
+      return this.http.post<Response>(`${this.apiServerUrl}/authenticate`, user);
+    }
+
+    getToken(){
+      return localStorage.getItem('token');
     }
 
 }
