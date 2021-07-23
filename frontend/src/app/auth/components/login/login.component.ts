@@ -9,6 +9,7 @@ import { StorageService } from '../../../core/services/storage.service';
 import { AuthService } from '../../services/auth.service';
 import {Ship} from "../../../ship/ship.model";
 import {User} from "../../user.model";
+import {JWTUtils} from "../../../core/services/jwt.utils";
 
 
 @Component({
@@ -19,6 +20,7 @@ import {User} from "../../user.model";
 export class LoginComponent implements OnInit {
 
   public authForm: FormGroup;
+  isLoggedIn = false;
 
   constructor(
     private fb: FormBuilder,
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
     private storageService: StorageService,
     private route: ActivatedRoute,
     private router: Router,
-    private toasterService: ToastrService
+    private toasterService: ToastrService,
   ) {
     this.authForm = this.fb.group({
       username: [''],
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
       let user: User = authForm.value;
       this.authService.login(user)
         .subscribe(response => {
+          //this.storageService.setAccessToken(response.data);
           if (response.status) {
             alert(response.message);
             this.authForm.reset();
@@ -60,12 +63,12 @@ export class LoginComponent implements OnInit {
 
 
   updateToken(data: any) {
-    this.storageService.setAccessToken('token');
-    this.storageService.setRefreshToken('token');
+    this.storageService.setAccessToken(data);
+    //this.storageService.setRefreshToken('$2a$10$sHCWxNowmG6kOOkfaDQPp.KC6mErRsSVHoz1L1Vr0DDAXV41AVRRa');
     this.route.queryParams
       .subscribe(params => {
         let url = params.returnUrl;
-        if (!url) { url = '/ship'; }
+        if (!url) { url = '/ships'; }
         this.router.navigate([url]);
       });
   }

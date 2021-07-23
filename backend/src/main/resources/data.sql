@@ -2,6 +2,9 @@ create table if not exists users(user_id int, username varchar2(40) , password v
 
 --Insert Into users (user_id , username, password , is_active) values ( 1, 'shivani','$2a$10$sHCWxNowmG6kOOkfaDQPp.KC6mErRsSVHoz1L1Vr0DDAXV41AVRRa',true );
 
+
+update users set password ='$2a$10$2SKDbWdrk3TLV0LiS5KJ2uHvCadmjvChu8FN2EVtloK3yob9mXfxq' where username ='shivani';
+
 create table  if not exists roles(role_id int, role_name varchar2(40));
 
 --Insert Into roles values ( 1, 'ADMIN' );

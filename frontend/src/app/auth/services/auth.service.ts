@@ -17,7 +17,9 @@ export class AuthService {
     }
 
     login(user: User): Observable<Response> {
-      return this.http.post<Response>(`${this.apiServerUrl}/authenticate`, user);
+      let resp = this.http.post<Response>(`${this.apiServerUrl}/authenticate`, user,{responseType: 'text' as 'json'});
+      console.log("response : ", resp);
+      return resp;
     }
 
     getToken(){

@@ -3,7 +3,6 @@ package com.hpc.shipservice.service;
 import com.hpc.shipservice.entity.Ship;
 import com.hpc.shipservice.entity.User;
 import com.hpc.shipservice.models.AuthenticationRequest;
-import com.hpc.shipservice.models.AuthenticationResponse;
 import com.hpc.shipservice.models.Response;
 import com.hpc.shipservice.repository.ShipRepository;
 import com.hpc.shipservice.repository.UserRepository;
@@ -14,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -39,6 +39,9 @@ public class ShipService {
 
     @Autowired
     UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public ResponseEntity<Response> addNewShipInfo(Ship ship){
         Response response = new Response();
@@ -97,23 +100,28 @@ public class ShipService {
     public ResponseEntity<?> authenticate(AuthenticationRequest u) {
         Response response = new Response();
         String jwt = null;
-        Optional<User> user = userRepository.getUserByUsername(u.getUsername());
+        System.out.println(bCryptPasswordEncoder.encode(u.getPassword()));
+        Optional<User> user = userRepository.getUserByUsername(u.getUsername(), bCryptPasswordEncoder.encode(u.getPassword()));
         if(!user.isPresent()){
-            response.setMessage("Username does not exist");
-        }else if(!user.get().getPassword().equals(u.getPassword())){
-            response.setMessage("Password incorrect");
+            response.setMessage("Invalid username or password");
         }else{
             try {
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(u.getUsername(), u.getPassword()));
             }catch(BadCredentialsException e){
                 e.printStackTrace();
+                response.setMessage("Invalid password");
             }
             UserDetails userDetails = userDetailsService.loadUserByUsername(u.getUsername());
+            System.out.println(userDetails);
             jwt = jwtTokenUtil.generateToken(userDetails);
+            response.setData(jwt);
+            response.setMessage("Authentication success");
+            System.out.println(jwt);
         }
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        return ResponseEntity.ok(response);
     }
 
+    //$2a$10$2SKDbWdrk3TLV0LiS5KJ2uHvCadmjvChu8FN2EVtloK3yob9mXfxq
 
 }
 
