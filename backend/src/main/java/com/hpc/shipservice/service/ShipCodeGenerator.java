@@ -13,8 +13,8 @@ public class ShipCodeGenerator {
 
     public String generateShipCode(Integer id){
 
-        int max = 18; //234
-        int i  = (Integer) (id/max) + 1000; //alternate of division operator
+        int max = 18;
+        int i  = (Integer) (id/max) + 1000;
         String c = codes.get(id%max);
         return "SHIP-" + i + "-" + c;
     }

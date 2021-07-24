@@ -2,7 +2,7 @@ package com.hpc.shipservice.service;
 
 import com.hpc.shipservice.entity.Ship;
 import com.hpc.shipservice.entity.User;
-import com.hpc.shipservice.models.AuthenticationRequest;
+import com.hpc.shipservice.models.JwtRequest;
 import com.hpc.shipservice.models.Response;
 import com.hpc.shipservice.repository.ShipRepository;
 import com.hpc.shipservice.repository.UserRepository;
@@ -38,7 +38,7 @@ public class ShipService {
     JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    JwtUserDetailsService userDetailsService;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -97,7 +97,7 @@ public class ShipService {
         return ResponseEntity.ok(response);
     }
 
-    public ResponseEntity<?> authenticate(AuthenticationRequest u) {
+    public ResponseEntity<?> authenticate(JwtRequest u) {
         Response response = new Response();
         String jwt = null;
         System.out.println(bCryptPasswordEncoder.encode(u.getPassword()));
@@ -114,7 +114,10 @@ public class ShipService {
             UserDetails userDetails = userDetailsService.loadUserByUsername(u.getUsername());
             System.out.println(userDetails);
             jwt = jwtTokenUtil.generateToken(userDetails);
-            response.setData(jwt);
+            String temp ="$2a$10$2SKDbWdrk3TLV0LiS5KJ2uHvCadmjvChu8FN2EVtloK3yob9mXfxq";
+            response.setData(temp);
+            response.setStatus(true);
+            //response.setData(jwt);
             response.setMessage("Authentication success");
             System.out.println(jwt);
         }
