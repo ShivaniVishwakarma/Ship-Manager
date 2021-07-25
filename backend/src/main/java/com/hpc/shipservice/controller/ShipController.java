@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,6 +25,7 @@ public class ShipController {
     //Add new ship info
     @PostMapping("/add")
     public ResponseEntity<?> addNewShipInfo(@RequestBody Ship ship){
+        System.out.println("Ship info : " + ship);
         return shipService.addNewShipInfo(ship);
     }
 
@@ -53,5 +55,18 @@ public class ShipController {
         return shipService.deleteShipInfo(shipCode);
     }
 
+    //Get all ships in sorted order
+    @GetMapping("/getAllSortedShips")
+    public ResponseEntity<List<Ship>> getAllSortedShips(@RequestParam(defaultValue = "id,desc") String[] sort) {
+        return shipService.getAllSortedShips(sort);
+    }
 
+    //Get all ships page
+    @GetMapping("/getAllShipsPage")
+    public ResponseEntity<List<Ship>> getAllShipsPage(@RequestParam(required = false) String shipName,
+                                                      @RequestParam(defaultValue = "0") int page,
+                                                      @RequestParam(defaultValue = "2") int size,
+                                                      @RequestParam(defaultValue = "id,desc") String[] sort) {
+        return shipService.getAllShipsPage(shipName,page,size,sort);
+    }
 }

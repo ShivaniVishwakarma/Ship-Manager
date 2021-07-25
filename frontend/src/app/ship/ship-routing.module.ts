@@ -13,10 +13,10 @@ const routes: Routes = [
         path: '',
         component: ShipComponent,
         children: [
-            { path: '', redirectTo: 'ship/list', pathMatch: 'full' },
+            { path: '', redirectTo: 'list', pathMatch: 'full' },
             { path: 'list', component: ShipListComponent, data: { title: 'Ship List' } },
             { path: 'add', component: ShipAddComponent, data: { title: 'Add New Ship' } },
-            { path: 'edit/:id', component: ShipEditComponent, data: { title: 'Update Ship Details' } },
+            { path: 'update/:id', component: ShipEditComponent, data: { title: 'Update Ship Details' } },
             { path: '**', redirectTo: 'list' }
         ]
     },

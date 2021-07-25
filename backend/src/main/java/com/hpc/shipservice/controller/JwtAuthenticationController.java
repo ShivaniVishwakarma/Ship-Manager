@@ -1,7 +1,7 @@
 package com.hpc.shipservice.controller;
 
 import com.hpc.shipservice.models.JwtRequest;
-import com.hpc.shipservice.models.JwtResponse;
+import com.hpc.shipservice.models.Response;
 import com.hpc.shipservice.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,11 @@ public class JwtAuthenticationController {
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
-		return ResponseEntity.ok(new JwtResponse(token));
+		Response response = new Response();
+		response.setData(token);
+		response.setStatus(true);
+		//return ResponseEntity.ok(new JwtResponse(token));
+		return ResponseEntity.ok(response);
 	}
 
 

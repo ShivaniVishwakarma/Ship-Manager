@@ -5,16 +5,8 @@
     <div class="panel-body">
         <form [formGroup]="shipForm" (ngSubmit)="saveShip(shipForm)" novalidate>
 
-            <div class="row form-group">
-                <div class="col-md-4"><label for="code" class="field-label text-muted">Ship Code</label></div>
-                <div class="col-md-8">
-                    <input type="text" name="code" id="code" formControlName="code" class="form-control"
-                        placeholder="Enter Ship Code" />
-                </div>
-            </div>
-
             <div class="row">
-                <div class="col-md-4"><label for="name" class="field-label text-muted">Name</label></div>
+                <div class="col-md-4"><label for="name" class="field-label text-muted">Ship Name</label></div>
                 <div class="col-md-8">
                     <input type="text" name="name" id="name" formControlName="name" class="form-control"
                         placeholder="Enter Name" />

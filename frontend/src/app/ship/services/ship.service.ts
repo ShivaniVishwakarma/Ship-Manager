@@ -17,8 +17,12 @@ export class ShipService {
   constructor(private http: HttpClient) {
   }
 
-  getShipList(page: Page): Observable<Ship[]> {
+  getShipList1(page: Page): Observable<Ship[]> {
     return this.http.get<Ship[]>(`${this.apiServerUrl}/getall?pageNumber=${page.pageNumber}&recordsPerPage=${page.recordsPerPage}&search=${page.search}`);
+  }
+
+  getShipList(): Observable<Ship[]> {
+    return this.http.get<Ship[]>(`${this.apiServerUrl}/getall`);
   }
 
   getShip(shipCode: string): Observable<Response> {
@@ -26,6 +30,7 @@ export class ShipService {
   }
 
   addShip(ship: Ship): Observable<Response> {
+    console.log("ship",ship);
     return this.http.post<Response>(`${this.apiServerUrl}/add`, ship);
   }
 

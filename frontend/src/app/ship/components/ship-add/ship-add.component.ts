@@ -16,20 +16,21 @@ export class ShipAddComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private shipService: ShipService) {
     this.shipForm = this.fb.group({
-      code: '',
+      id: [''],
       name: [''],
       length: [''],
       width: [''],
+      code: ['']
     });
   }
 
   ngOnInit(): void {
   }
 
-
   saveShip(shipForm: FormGroup) {
     if (shipForm.valid) {
       let ship: Ship = shipForm.value;
+      console.log("ship name",ship.shipName);
       this.shipService.addShip(ship)
         .subscribe(response => {
           if (response.status) {

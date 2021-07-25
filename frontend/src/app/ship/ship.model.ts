@@ -1,6 +1,7 @@
 export interface Ship {
-    name: string;
-    length: number;
-    width: number;
-    code: string;
+    id: number,
+    shipName: string;
+    shipLengthInMeters: number;
+    shipWidthInMeters: number;
+    shipCode: string;
 }

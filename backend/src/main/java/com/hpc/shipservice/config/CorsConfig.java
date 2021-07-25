@@ -12,15 +12,28 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfig implements WebMvcConfigurer {
 
     /**
-     * @param registry updating registry to allow all mappings,
+     * @param corsRegistry updating registry to allow all mappings,
      *                 all methods types(get, post, put, delete, patch, options, head)
      *                 and all external domains
      */
+    /*
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry
                 .addMapping("/**")
                 .allowedMethods("*")
                 .allowedOrigins("*");
+    }
+
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry corsRegistry) {
+        corsRegistry.addMapping("/**")
+                .allowedOrigins("http://localhost:4200")
+                .allowedMethods("*")
+                .maxAge(3600L)
+                .allowedHeaders("*")
+                .exposedHeaders("Authorization")
+                .allowCredentials(true);
     }
 }

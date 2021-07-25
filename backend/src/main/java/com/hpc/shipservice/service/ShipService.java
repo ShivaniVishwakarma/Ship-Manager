@@ -8,6 +8,11 @@ import com.hpc.shipservice.repository.ShipRepository;
 import com.hpc.shipservice.repository.UserRepository;
 import com.hpc.shipservice.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,8 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ShipService {
@@ -45,9 +49,7 @@ public class ShipService {
 
     public ResponseEntity<Response> addNewShipInfo(Ship ship){
         Response response = new Response();
-        Optional<Ship> s = shipRepository.findByShipCode(ship.getShipCode());
-
-        if (!s.isPresent()) {
+        //Optional<Ship> s = shipRepository.findByShipCode(ship.getShipCode());
             Ship newShip = shipRepository.save(ship);
             String code = shipCodeGenerator.generateShipCode(newShip.getId());
             Optional<Ship> s1 = shipRepository.findById(newShip.getId());
@@ -57,9 +59,8 @@ public class ShipService {
             }
             response.setMessage("Ship Added Successfully");
             response.setStatus(true);
-        } else {
-            response.setMessage("Ship already exists with " + ship.getShipCode());
-        }
+            response.setData(newShip);
+
         return ResponseEntity.ok(response);
     }
 
@@ -124,7 +125,86 @@ public class ShipService {
         return ResponseEntity.ok(response);
     }
 
-    //$2a$10$2SKDbWdrk3TLV0LiS5KJ2uHvCadmjvChu8FN2EVtloK3yob9mXfxq
+    public ResponseEntity<List<Ship>> getAllSortedShips(String[] sort) {
+        try {
+            List<Sort.Order> orders = new ArrayList<Sort.Order>();
 
+            if (sort[0].contains(",")) {
+                // will sort more than 2 fields
+                // sortOrder="field, direction"
+                //localhost:8080/ships/getAllSortedShips?sort=id,desc&sort=shipCode,desc
+                for (String sortOrder : sort) {
+                    String[] _sort = sortOrder.split(",");
+                    orders.add(new Sort.Order(getSortDirection(_sort[1]), _sort[0]));
+                }
+            } else {
+                //localhost:8080/ships/getAllSortedShips?sort=id,desc
+                // sort=[field, direction]
+                orders.add(new Sort.Order(getSortDirection(sort[1]), sort[0]));
+            }
+
+            List<Ship> Ships = shipRepository.findAll(Sort.by(orders));
+
+            if (Ships.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(Ships, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private Sort.Direction getSortDirection(String direction) {
+        if (direction.equals("asc")) {
+            return Sort.Direction.ASC;
+        } else if (direction.equals("desc")) {
+            return Sort.Direction.DESC;
+        }
+
+        return Sort.Direction.ASC;
+    }
+
+    public ResponseEntity<List<Ship>> getAllShipsPage(String shipName, int page, int size, String[] sort) {
+
+        try {
+            List<Sort.Order> orders = new ArrayList<Sort.Order>();
+
+            if (sort[0].contains(",")) {
+                // will sort more than 2 fields
+                // sortOrder="field, direction"
+                for (String sortOrder : sort) {
+                    String[] _sort = sortOrder.split(",");
+                    orders.add(new Sort.Order(getSortDirection(_sort[1]), _sort[0]));
+                }
+            } else {
+                // sort=[field, direction]
+                orders.add(new Sort.Order(getSortDirection(sort[1]), sort[0]));
+            }
+
+            List<Ship> Ships = new ArrayList<Ship>();
+            Pageable pagingSort = PageRequest.of(page, size, Sort.by(orders));
+
+            Page<Ship> pageTuts;
+            if (shipName == null)
+                pageTuts = shipRepository.findAll(pagingSort);
+            else
+                pageTuts = shipRepository.findByShipNameContaining(shipName, pagingSort);
+
+            Ships = pageTuts.getContent();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("Ships", Ships);
+            response.put("currentPage", pageTuts.getNumber());
+            response.put("totalItems", pageTuts.getTotalElements());
+            response.put("totalPages", pageTuts.getTotalPages());
+
+            return new ResponseEntity(response, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
+    }
 }
 

@@ -42,29 +42,25 @@ export class LoginComponent implements OnInit {
   login(authForm: FormGroup) {
     if (authForm.valid) {
       let user: User = authForm.value;
-      this.authService.login(user)
+      this.authService.authenticate(user)
         .subscribe(response => {
-          //this.storageService.setAccessToken(response.data);
           if (response.status) {
-            alert(response.message);
             this.authForm.reset();
+            console.log(response.data);
             this.updateToken(response.data);
           } else {
             alert(response.message);
           }
         }, error => {
           this.toasterService.error('Error while login', Constants.TITLE_ERROR);
-          //this.updateToken({});
         });
     } else {
       alert("Please fill form, something is missing or invalid");
     }
   }
 
-
   updateToken(data: any) {
     this.storageService.setAccessToken(data);
-    //this.storageService.setRefreshToken('$2a$10$sHCWxNowmG6kOOkfaDQPp.KC6mErRsSVHoz1L1Vr0DDAXV41AVRRa');
     this.route.queryParams
       .subscribe(params => {
         let url = params.returnUrl;

@@ -17,8 +17,6 @@ public class Ship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@GeneratedValue(generator="sequence_ship_code")
-    //@GenericGenerator(name = "sequence_ship_code", strategy = "com.hpc.shipservice.service.ShipCodeGenerator")
     private Integer id;
     private String shipCode;
     private String shipName;

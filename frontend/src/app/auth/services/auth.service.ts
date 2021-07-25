@@ -16,9 +16,9 @@ export class AuthService {
     constructor(private http: HttpClient) {
     }
 
-    login(user: User): Observable<Response> {
-      let resp = this.http.post<Response>(`${this.apiServerUrl}/authenticate`, user,{responseType: 'text' as 'json'});
-      console.log("response : ", resp);
+    authenticate(user: User): Observable<Response> {
+      console.log("inside authenticate");
+      let resp = this.http.post<Response>(`${this.apiServerUrl}/authenticate`, user);
       return resp;
     }
 

@@ -25,18 +25,20 @@ export class ShipListComponent implements OnInit {
 
   ngOnInit(): void {
     //this.getShipList(this.page);
-    this.ships = [
-      {
-        code: 'fddfd',
-        name: 'dfdfd',
-        length: 2,
-        width: 3
-      }
-    ]
+    this.getShipList();
   }
 
-  getShipList(page: Page) {
-    this.shipService.getShipList(page)
+  getShipList1(page: Page) {
+    this.shipService.getShipList1(page)
+      .subscribe(response => {
+        this.ships = response;
+      }, error => {
+        console.log("Error Occured", error);
+      });
+  }
+
+  getShipList() {
+    this.shipService.getShipList()
       .subscribe(response => {
         this.ships = response;
       }, error => {
@@ -49,7 +51,7 @@ export class ShipListComponent implements OnInit {
       .subscribe(response => {
         if (response.status) {
           alert(response.message);
-          this.getShipList(this.page);
+          this.getShipList1(this.page);
         } else {
           alert(response.message);
         }
@@ -59,7 +61,7 @@ export class ShipListComponent implements OnInit {
   }
 
   editShip(shipCode: string) {
-    this.router.navigate(['ship/edit', shipCode]);
+    this.router.navigate(['ships/update', shipCode]);
   }
 
 }

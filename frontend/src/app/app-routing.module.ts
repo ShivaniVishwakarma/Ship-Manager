@@ -7,7 +7,7 @@ import { NoRouteFoundComponent } from './no-route/NoRouteFoundCompoent';
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   {
-    path: 'ship', loadChildren: () => import('./ship/ship.module').then(m => m.ShipModule),
+    path: 'ships', loadChildren: () => import('./ship/ship.module').then(m => m.ShipModule),
     canActivate: [AuthGuard]
   },
   {
