@@ -17,8 +17,8 @@ export class AuthService {
     }
 
     authenticate(user: User): Observable<Response> {
-      console.log("inside authenticate");
       let resp = this.http.post<Response>(`${this.apiServerUrl}/authenticate`, user);
+      console.log(resp);
       return resp;
     }
 

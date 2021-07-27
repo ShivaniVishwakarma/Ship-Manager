@@ -1,8 +1,6 @@
 package com.hpc.shipservice.service;
 
 import com.hpc.shipservice.entity.Ship;
-import com.hpc.shipservice.entity.User;
-import com.hpc.shipservice.models.JwtRequest;
 import com.hpc.shipservice.models.Response;
 import com.hpc.shipservice.repository.ShipRepository;
 import com.hpc.shipservice.repository.UserRepository;
@@ -15,9 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -117,7 +112,7 @@ public class ShipService {
     public ResponseEntity<?> deleteShipInfo(String shipCode) {
         return ResponseEntity.ok(shipRepository.deleteShipByShipCode(shipCode));
     }
-
+/*
     public ResponseEntity<?> authenticate(JwtRequest u) {
         Response response = new Response();
         String jwt = null;
@@ -132,18 +127,23 @@ public class ShipService {
                 e.printStackTrace();
                 response.setMessage("Invalid password");
             }
+
             UserDetails userDetails = userDetailsService.loadUserByUsername(u.getUsername());
-            System.out.println(userDetails);
+            System.out.println("userDetails : " + userDetails);
             jwt = jwtTokenUtil.generateToken(userDetails);
             String temp = "$2a$10$2SKDbWdrk3TLV0LiS5KJ2uHvCadmjvChu8FN2EVtloK3yob9mXfxq";
             response.setData(temp);
             response.setStatus(true);
+            String uname = "admin";
+            System.out.println("username from token : " + jwtTokenUtil.getUsernameFromToken(jwt));
             //response.setData(jwt);
             response.setMessage("Authentication success");
             //System.out.println(jwt);
         }
         return ResponseEntity.ok(response);
     }
+
+ */
 
     public ResponseEntity<List<Ship>> getAllSortedShips(String[] sort) {
         try {

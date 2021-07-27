@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         .subscribe(response => {
           if (response.status) {
             this.authForm.reset();
-            console.log(response.data);
+            console.log("received token", response.data);
             this.updateToken(response.data);
           } else {
             alert(response.message);

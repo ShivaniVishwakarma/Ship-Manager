@@ -4,6 +4,6 @@ import { Component } from "@angular/core";
     selector: 'app-auth',
     template: '<router-outlet> </router-outlet>'
 })
-export default class AuthComponent {
+export class AuthComponent {
 
 }

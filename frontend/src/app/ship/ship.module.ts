@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ShipAddComponent } from "./components/ship-add/ship-add.component";
@@ -10,6 +10,7 @@ import { ShipRoutingModule } from "./ship-routing.module";
 import ShipComponent from "./ship.component";
 import { MenuComponent } from './menu/menu.component';
 import { ActionComponent } from "../core/shared/components/action.component";
+import {TokenInterceptor} from "../core/interceptors/token.interceptor";
 
 @NgModule({
     declarations: [
@@ -20,7 +21,12 @@ import { ActionComponent } from "../core/shared/components/action.component";
         ShipEditComponent,
         ActionComponent
     ],
-    providers: [ShipService],
+    providers: [ShipService,
+  [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }]],
     imports: [
         CommonModule,
         ShipRoutingModule,

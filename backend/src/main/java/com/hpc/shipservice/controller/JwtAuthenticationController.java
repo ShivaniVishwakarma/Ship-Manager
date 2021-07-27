@@ -11,6 +11,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -26,11 +27,15 @@ public class JwtAuthenticationController {
 	private JwtTokenUtil jwtTokenUtil;
 
 	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Autowired
 	private UserDetailsService jwtInMemoryUserDetailsService;
 
 	//Login authentication
 	@PostMapping("/authenticate")
 	public ResponseEntity<?> generateAuthenticationToken(@RequestBody JwtRequest jwtRequest) throws Exception {
+		System.out.println("Encrypted pwd : " + bCryptPasswordEncoder.encode(jwtRequest.getPassword()));
 
 		authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
 
@@ -39,10 +44,12 @@ public class JwtAuthenticationController {
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
+		System.out.println("Token: " + token);
+
 		Response response = new Response();
 		response.setData(token);
 		response.setStatus(true);
-		//return ResponseEntity.ok(new JwtResponse(token));
+		response.setMessage("Token Generated");
 		return ResponseEntity.ok(response);
 	}
 
@@ -60,4 +67,4 @@ public class JwtAuthenticationController {
 	}
 }
 
-//eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaGl2YW5pIiwiZXhwIjoxNjI3MTQ5Mjc1LCJpYXQiOjE2MjcxMzEyNzV9.Qgxvn33RJXYSE8q36V3-TFW4Iw3tyDSSdEbfvggGvANBG_vvX6qw9YADaVs1sUmUViAFv3Spi46bF-sVWz3P0Q
+//eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaGl2YW5pIiwiZXhwIjoxNjI3NDA5NjQ5LCJpYXQiOjE2MjczOTE2NDl9.vlN7dgaLxkPcbNJxmpY9QYvWRX2QEg_Bgpci-0pUtlaFXrB09EMtBlIxEarFXWHGs4YaPIR8-8L_3PrxOSPnzw
