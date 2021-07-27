@@ -7,6 +7,5 @@ export function onSubmitFormGroup(formGroup: FormGroup) {
             control && control.markAsTouched({ onlySelf: true });       // {3}
         });
         return;
-
     }
 }

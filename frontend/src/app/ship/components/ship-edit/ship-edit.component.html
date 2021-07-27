@@ -6,33 +6,32 @@
         <form [formGroup]="shipForm" (ngSubmit)="editShip(shipForm)" novalidate>
 
             <div class="row form-group">
-                <div class="col-md-4"><label for="code" class="field-label text-muted">Ship Code</label></div>
+                <div class="col-md-4"><label for="shipCode" class="field-label text-muted">Ship Code</label></div>
                 <div class="col-md-8">
-                    <input type="text" name="code" id="code" formControlName="code" class="form-control"
-                        placeholder="Enter Ship Code" />
+                    <input type="text" name="shipCode" id="shipCode" formControlName="shipCode" class="form-control" />
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-4"><label for="name" class="field-label text-muted">Name</label></div>
+                <div class="col-md-4"><label for="shipName" class="field-label text-muted">Name</label></div>
                 <div class="col-md-8">
-                    <input type="text" name="name" id="name" formControlName="name" class="form-control"
+                    <input type="text" name="shipName" id="shipName" formControlName="shipName" class="form-control"
                         placeholder="Enter Name" />
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-4"><label for="length" class="field-label text-muted">Length</label></div>
+                <div class="col-md-4"><label for="shipLengthInMeters" class="field-label text-muted">Length</label></div>
                 <div class="col-md-8">
-                    <input type="number" name="length" id="length" formControlName="length" class="form-control"
+                    <input type="number" name="shipLengthInMeters" id="shipLengthInMeters" formControlName="shipLengthInMeters" class="form-control"
                         placeholder="Enter Length" />
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-4"><label for="width" class="field-label text-muted">Width</label></div>
+                <div class="col-md-4"><label for="shipWidthInMeters" class="field-label text-muted">Width</label></div>
                 <div class="col-md-8">
-                    <input type="width" name="width" id="width" formControlName="width" class="form-control"
+                    <input type="number" name="shipWidthInMeters" id="shipWidthInMeters" formControlName="shipWidthInMeters" class="form-control"
                         placeholder="Enter Width" />
                 </div>
             </div>

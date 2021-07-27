@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ShipService } from '../../services/ship.service';
 import { Ship } from '../../ship.model';
+import {setDisabled} from "ag-grid-community/dist/lib/utils/dom";
 
 @Component({
   selector: 'app-ship-edit',
@@ -19,19 +20,20 @@ export class ShipEditComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private router: Router) {
     this.shipForm = this.fb.group({
-      code: '',
-      name: [''],
-      length: [''],
-      width: [''],
+      shipCode: ['', Validators.required],
+      shipName: ['',Validators.required],
+      shipLengthInMeters: ['',Validators.required],
+      shipWidthInMeters: ['',Validators.required]
     });
   }
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe(response => this.getShip(response.id));
+    this.shipForm.get('shipCode')?.disable();
   }
 
   getShip(shipCode: string) {
-    this.shipService.getShip(shipCode)
+      this.shipService.getShip(shipCode)
       .subscribe(response => {
         if (response.status) {
           this.shipForm.patchValue(response.data);
@@ -43,15 +45,14 @@ export class ShipEditComponent implements OnInit {
       });
   }
 
-
   editShip(shipForm: FormGroup) {
     if (shipForm.valid) {
-      let ship: Ship = shipForm.value;
+      let ship: Ship = shipForm.getRawValue();
       this.shipService.editShip(ship)
         .subscribe(response => {
           if (response.status) {
             alert(response.message);
-            this.router.navigate(['ship/list']);
+            this.router.navigate(['ships/list']);
           } else {
             alert(response.message);
           }

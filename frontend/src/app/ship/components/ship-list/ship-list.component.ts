@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Ship } from '../../ship.model';
 import { ShipService } from '../../services/ship.service';
 import Page from 'src/app/models/page.model';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-ship-list',
@@ -60,8 +61,31 @@ export class ShipListComponent implements OnInit {
       });
   }
 
+
   editShip(shipCode: string) {
     this.router.navigate(['ships/update', shipCode]);
   }
+
+/*
+  editShip(shipForm: FormGroup) {
+    if (shipForm.valid) {
+      let ship: Ship = shipForm.value;
+      this.shipService.editShip(ship)
+        .subscribe(response => {
+          if (response.status) {
+            alert(response.message);
+            this.router.navigate(['ship/list']);
+          } else {
+            alert(response.message);
+          }
+        }, error => {
+          alert("Error while adding ship");
+        });
+    } else {
+      alert("Please fill form, something is missing or invalid");
+    }
+  }
+
+ */
 
 }

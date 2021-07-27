@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { ShipService } from '../../services/ship.service';
 
 import { Ship } from '../../ship.model';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-ship-add',
@@ -14,13 +15,11 @@ export class ShipAddComponent implements OnInit {
 
   public shipForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private shipService: ShipService) {
+  constructor(private fb: FormBuilder, private shipService: ShipService, private router: Router) {
     this.shipForm = this.fb.group({
-      id: [''],
-      name: [''],
-      length: [''],
-      width: [''],
-      code: ['']
+      shipName: ['',Validators.required],
+      shipLengthInMeters: ['',Validators.required],
+      shipWidthInMeters: ['',Validators.required]
     });
   }
 
@@ -30,12 +29,12 @@ export class ShipAddComponent implements OnInit {
   saveShip(shipForm: FormGroup) {
     if (shipForm.valid) {
       let ship: Ship = shipForm.value;
-      console.log("ship name",ship.shipName);
       this.shipService.addShip(ship)
         .subscribe(response => {
           if (response.status) {
             alert(response.message);
             this.shipForm.reset();
+            this.goToShipList();
           } else {
             alert(response.message);
           }
@@ -46,5 +45,10 @@ export class ShipAddComponent implements OnInit {
       alert("Please fill form, something is missing or invalid");
     }
   }
+
+  goToShipList() {
+    this.router.navigate(['ships']);
+  }
+
 
 }

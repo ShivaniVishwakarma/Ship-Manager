@@ -47,20 +47,21 @@ public class ShipService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public ResponseEntity<Response> addNewShipInfo(Ship ship){
+    public ResponseEntity<Response> addNewShipInfo(Ship ship) {
         Response response = new Response();
-        //Optional<Ship> s = shipRepository.findByShipCode(ship.getShipCode());
-            Ship newShip = shipRepository.save(ship);
-            String code = shipCodeGenerator.generateShipCode(newShip.getId());
-            Optional<Ship> s1 = shipRepository.findById(newShip.getId());
-            newShip.setShipCode(code);
-            if(s1.isPresent()) {
-                shipRepository.save(newShip);
-            }
+        Ship newShip = shipRepository.save(ship);
+        String code = shipCodeGenerator.generateShipCode(newShip.getId());
+        Optional<Ship> s1 = shipRepository.findById(newShip.getId());
+        newShip.setShipCode(code);
+        if (s1.isPresent()) {
+            shipRepository.save(newShip);
             response.setMessage("Ship Added Successfully");
             response.setStatus(true);
             response.setData(newShip);
-
+        }else {
+            response.setMessage("Failed to add ship");
+            response.setStatus(false);
+        }
         return ResponseEntity.ok(response);
     }
 
@@ -68,34 +69,53 @@ public class ShipService {
         return shipRepository.findAll();
     }
 
-    public Optional<Ship> getShipsByShipCode(String shipCode) {
-        return shipRepository.findByShipCode(shipCode);
+    public ResponseEntity<?> getShipByShipCode(String shipCode) {
+        Response response = new Response();
+        Optional<Ship> s = shipRepository.findByShipCode(shipCode);
+        if (s.isPresent()) {
+            response.setMessage("Ship fetched Successfully");
+            response.setStatus(true);
+            response.setData(s.get());
+        } else {
+            response.setStatus(false);
+            response.setMessage("Ship does not exists with " + shipCode);
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    public Optional<Ship> getShip(String shipCode) {
+        Response response = new Response();
+        Optional<Ship> s = shipRepository.findByShipCode(shipCode);
+        if (s.isPresent()) {
+            response.setMessage("Ship fetched Successfully");
+            response.setStatus(true);
+            response.setData(s.get());
+        } else {
+            response.setStatus(false);
+            response.setMessage("Ship does not exists with " + shipCode);
+        }
+        return s;
     }
 
     public ResponseEntity<?> updateShipInfo(Ship ship) {
         Response response = new Response();
-        Optional<Ship> s = shipRepository.findByShipCode(ship.getShipCode());
+        Optional<Ship> s = getShip(ship.getShipCode());
         if (s.isPresent()) {
+            ship.setShipCode(s.get().getShipCode());
+            ship.setId(s.get().getId());
             shipRepository.save(ship);
+            response.setData(ship);
             response.setMessage("Ship Updated Successfully");
             response.setStatus(true);
         } else {
-            response.setMessage("Ship does not exists with " + ship.getShipCode());
+            response.setStatus(false);
+            response.setMessage("Failed to update ship info ");
         }
         return ResponseEntity.ok(response);
     }
 
     public ResponseEntity<?> deleteShipInfo(String shipCode) {
-        Response response = new Response();
-        Optional<Ship> s = shipRepository.findByShipCode(shipCode);
-
-        if (!s.isPresent()) {
-            response.setMessage("Ship does not exist");
-        } else {
-            shipRepository.deleteById(shipCode);
-            response.setMessage("Ship deleted successfully");
-        }
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(shipRepository.deleteShipByShipCode(shipCode));
     }
 
     public ResponseEntity<?> authenticate(JwtRequest u) {
@@ -103,24 +123,24 @@ public class ShipService {
         String jwt = null;
         System.out.println(bCryptPasswordEncoder.encode(u.getPassword()));
         Optional<User> user = userRepository.getUserByUsername(u.getUsername(), bCryptPasswordEncoder.encode(u.getPassword()));
-        if(!user.isPresent()){
+        if (!user.isPresent()) {
             response.setMessage("Invalid username or password");
-        }else{
+        } else {
             try {
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(u.getUsername(), u.getPassword()));
-            }catch(BadCredentialsException e){
+            } catch (BadCredentialsException e) {
                 e.printStackTrace();
                 response.setMessage("Invalid password");
             }
             UserDetails userDetails = userDetailsService.loadUserByUsername(u.getUsername());
             System.out.println(userDetails);
             jwt = jwtTokenUtil.generateToken(userDetails);
-            String temp ="$2a$10$2SKDbWdrk3TLV0LiS5KJ2uHvCadmjvChu8FN2EVtloK3yob9mXfxq";
+            String temp = "$2a$10$2SKDbWdrk3TLV0LiS5KJ2uHvCadmjvChu8FN2EVtloK3yob9mXfxq";
             response.setData(temp);
             response.setStatus(true);
             //response.setData(jwt);
             response.setMessage("Authentication success");
-            System.out.println(jwt);
+            //System.out.println(jwt);
         }
         return ResponseEntity.ok(response);
     }
@@ -167,6 +187,7 @@ public class ShipService {
 
     public ResponseEntity<List<Ship>> getAllShipsPage(String shipName, int page, int size, String[] sort) {
 
+        Response resp = new Response();
         try {
             List<Sort.Order> orders = new ArrayList<Sort.Order>();
 
@@ -199,12 +220,18 @@ public class ShipService {
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());
 
-            return new ResponseEntity(response, HttpStatus.OK);
+            resp.setData(response);
+            resp.setStatus(true);
+            resp.setMessage("Successfully retrieved ship info");
+
+            return new ResponseEntity(resp, HttpStatus.OK);
 
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            resp.setStatus(false);
+            resp.setMessage("Failed to retrieve data");
+            return new ResponseEntity(resp, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        
+
     }
 }
 

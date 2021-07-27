@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/ships")
@@ -39,8 +38,8 @@ public class ShipController {
 
     //Fetch ship by ShipCode
     @GetMapping("/get/{shipCode}")
-    public Optional<Ship> getShipsByShipCode(@PathVariable("shipCode") String shipCode) {
-        return shipService.getShipsByShipCode(shipCode);
+    public ResponseEntity<?> getShipsByShipCode(@PathVariable("shipCode") String shipCode) {
+        return shipService.getShipByShipCode(shipCode);
     }
 
     //Update ship by shipCode
