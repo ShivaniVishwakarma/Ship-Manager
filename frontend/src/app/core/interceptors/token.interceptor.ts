@@ -17,13 +17,12 @@ export class TokenInterceptor implements HttpInterceptor {
     console.log("localStorage token - " + this.localStorageService.getAccessToken());
     //request=request.clone();
     //request = request.headers.append("Authorization", `Bearer ${this.localStorageService.getAccessToken()}`);
-  /*  request = request.clone({
+    request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${this.localStorageService.getAccessToken()}`
       }
     });
 
-   */
     return next.handle(request);
   }
 }
