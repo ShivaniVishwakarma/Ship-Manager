@@ -7,19 +7,20 @@ import { Ship } from "../ship.model";
 
 import Page from "./../../models/page.model";
 import { Response } from "./../../utils/response.model";
-import {environment} from "../../../environments/environment";
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class ShipService {
 
-  private apiServerUrl = environment.apiBaseUrl;
+  private apiServerUrl = environment.apiBaseUrl + '/ships';
 
   constructor(private http: HttpClient) {
   }
 
   getShipList1(page: Page): Observable<Ship[]> {
-    return this.http.get<Ship[]>(`${this.apiServerUrl}/getall?pageNumber=${page.pageNumber}&recordsPerPage=${page.recordsPerPage}&search=${page.search}`);
+    return this.http.get<Ship[]>(`${this.apiServerUrl}/getAllShipsPage?shipName=${page.shipName}&page=${page.page}&size=${page.size}&sort=${page.sort}`);
   }
+  //localhost:8080/ships/getAllShipsPage?shipName=Titanic&page=0&size=2&sort=shipCode,asc
 
   getShipList(): Observable<Ship[]> {
     return this.http.get<Ship[]>(`${this.apiServerUrl}/getall`);
@@ -30,7 +31,7 @@ export class ShipService {
   }
 
   addShip(ship: Ship): Observable<Response> {
-    console.log("ship",ship);
+    console.log("ship", ship);
     return this.http.post<Response>(`${this.apiServerUrl}/add`, ship);
   }
 

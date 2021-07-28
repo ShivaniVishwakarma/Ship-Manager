@@ -5,6 +5,6 @@ import { Component } from "@angular/core";
     template: `<app-menu [title]="title"></app-menu>
             <router-outlet> </router-outlet>`
 })
-export default class ShipComponent {
+export class ShipComponent {
     title: string = 'Ship Manager';
 }

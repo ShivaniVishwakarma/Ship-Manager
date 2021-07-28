@@ -3,8 +3,10 @@ import { Router } from '@angular/router';
 
 import { Ship } from '../../ship.model';
 import { ShipService } from '../../services/ship.service';
-import Page from 'src/app/models/page.model';
-import {FormGroup} from "@angular/forms";
+import Page from '../../../models/page.model';
+import { ToastrService } from 'ngx-toastr';
+import { Constants } from '../../../core/constants';
+
 
 @Component({
   selector: 'app-ship-list',
@@ -13,79 +15,56 @@ import {FormGroup} from "@angular/forms";
 })
 export class ShipListComponent implements OnInit {
 
+  loading: boolean = true;
   ships: Ship[] = [];
+
   page: Page = {
-    totalRecords: 0,
-    pageNumber: 1,
-    recordsPerPage: 20,
-    search: ''
+    page: 0,
+    size: 2,
+    sort: [],
+    shipName: ''
   };
 
-
-  constructor(private shipService: ShipService, private router: Router) { }
+  constructor(private shipService: ShipService,
+    private toastrService: ToastrService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    //this.getShipList(this.page);
     this.getShipList();
-  }
-
-  getShipList1(page: Page) {
-    this.shipService.getShipList1(page)
-      .subscribe(response => {
-        this.ships = response;
-      }, error => {
-        console.log("Error Occured", error);
-      });
   }
 
   getShipList() {
     this.shipService.getShipList()
       .subscribe(response => {
         this.ships = response;
+        if (!this.ships.length) {
+          this.toastrService.error("Their are no records as of now", Constants.TITLE_ERROR);
+        }
+        this.loading = false;
       }, error => {
-        console.log("Error Occured", error);
+        this.toastrService.error("Error while fetching ship list", Constants.TITLE_ERROR);
+        this.loading = false;
       });
   }
+
 
   deleteShip(shipCode: string) {
     this.shipService.deleteShip(shipCode)
       .subscribe(response => {
         if (response.status) {
-          alert(response.message);
-          this.getShipList1(this.page);
+          this.toastrService.success(response.message, Constants.TITLE_SUCCESS);
+          this.getShipList();
         } else {
-          alert(response.message);
+          this.toastrService.error(response.message, Constants.TITLE_ERROR);
         }
       }, error => {
-        console.log("Error Occured", error);
+        this.toastrService.error("Error while adding ship details", Constants.TITLE_ERROR);
       });
   }
 
 
-  editShip(shipCode: string) {
+  goToEditShip(shipCode: string) {
     this.router.navigate(['ships/update', shipCode]);
   }
-
-/*
-  editShip(shipForm: FormGroup) {
-    if (shipForm.valid) {
-      let ship: Ship = shipForm.value;
-      this.shipService.editShip(ship)
-        .subscribe(response => {
-          if (response.status) {
-            alert(response.message);
-            this.router.navigate(['ship/list']);
-          } else {
-            alert(response.message);
-          }
-        }, error => {
-          alert("Error while adding ship");
-        });
-    } else {
-      alert("Please fill form, something is missing or invalid");
-    }
-  }
-
- */
 
 }

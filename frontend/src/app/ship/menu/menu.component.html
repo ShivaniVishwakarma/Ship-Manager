@@ -11,6 +11,11 @@
                     <a class="nav-link" routerLink="/ships/add">Add New Ship</a>
                 </li>
             </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">{{loggedInUser}} </li> <span class="clearfix"></span>
+                <li class="nav-item" (click)="logOut()"> <a class="nav-link">Log Out </a></li>
+            </ul>
         </div>
     </div>
 </nav>

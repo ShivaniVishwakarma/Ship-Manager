@@ -13,6 +13,7 @@ export class JWTUtils {
      * @param token 
      */
     public decodeJwt(token: string) {
+
         let decodedToken = this.parseJwt(token);
         return decodedToken;
     }

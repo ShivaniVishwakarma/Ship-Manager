@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NoRouteFoundComponent } from '../no-route/NoRouteFoundCompoent';
 
-import ShipComponent from './ship.component';
+import {ShipComponent} from './ship.component';
 
 import { ShipAddComponent } from './components/ship-add/ship-add.component';
 import { ShipEditComponent } from './components/ship-edit/ship-edit.component';

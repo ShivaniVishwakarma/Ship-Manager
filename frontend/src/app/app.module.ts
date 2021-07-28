@@ -11,8 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthGuard } from './core/guards/auth.guard';
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {TokenInterceptor} from "./core/interceptors/token.interceptor";
 
 @NgModule({
   declarations: [

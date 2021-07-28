@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 import { ShipService } from '../../services/ship.service';
-
 import { Ship } from '../../ship.model';
-import {Router} from "@angular/router";
+import { Constants } from '../../../core/constants';
 
 @Component({
   selector: 'app-ship-add',
@@ -15,11 +16,14 @@ export class ShipAddComponent implements OnInit {
 
   public shipForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private shipService: ShipService, private router: Router) {
+  constructor(private fb: FormBuilder,
+    private shipService: ShipService,
+    private toastrService: ToastrService,
+    private router: Router) {
     this.shipForm = this.fb.group({
-      shipName: ['',Validators.required],
-      shipLengthInMeters: ['',Validators.required],
-      shipWidthInMeters: ['',Validators.required]
+      shipName: ['', Validators.required],
+      shipLengthInMeters: ['', Validators.required],
+      shipWidthInMeters: ['', Validators.required]
     });
   }
 
@@ -32,17 +36,17 @@ export class ShipAddComponent implements OnInit {
       this.shipService.addShip(ship)
         .subscribe(response => {
           if (response.status) {
-            alert(response.message);
             this.shipForm.reset();
             this.goToShipList();
+            this.toastrService.success(response.message, Constants.TITLE_SUCCESS);
           } else {
-            alert(response.message);
+            this.toastrService.error(response.message, Constants.TITLE_ERROR);
           }
         }, error => {
-          alert("Error while adding ship");
+          this.toastrService.error("Error while adding ship", Constants.TITLE_ERROR);
         });
     } else {
-      alert("Please fill form, something is missing or invalid");
+      this.toastrService.error("Please fill form, something is missing or invalid", Constants.TITLE_ERROR);
     }
   }
 

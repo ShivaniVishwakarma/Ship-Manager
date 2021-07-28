@@ -3,33 +3,47 @@
     <div class="panel-header">
       <span class="panel-title"> Ship List</span>
     </div>
+    <br/>
     <div class="panel-body">
       <div class="row">
         <div class="col-md-12">
-          <table class="table table-stripped table-responsive table-bordered">
-            <thead>
-            <th> Ship Code</th>
-            <th> Name </th>
-            <th> length In Meters </th>
-            <th> Width In Meters </th>
-            <th> Actions </th>
-            </thead>
-            <tbody>
-            <tr *ngFor="let ship of ships">
-              <td>{{ship.shipCode}} </td>
-              <td>{{ship.shipName}} </td>
-              <td>{{ship.shipLengthInMeters}} </td>
-              <td>{{ship.shipWidthInMeters}} </td>
-              <td>
-                <app-actions [isDeleteEnabled]="true" [isEditEnabled]="true" (onEditClicked)="editShip(ship.shipCode)" (onDeleteClicked)="deleteShip(ship.shipCode)"></app-actions>
-                <!--<button class="btn btn-sm btn-primary" (click)="editShip(ship.shipCode)"> Edit
-                </button>
-                <button class="btn btn-sm btn-danger" (click)="deleteShip(ship.shipCode)"> Delete
-                </button> -->
-              </td>
-            </tr>
-            </tbody>
-          </table>
+
+          <p-table #dt [value]="ships" sortField= "Ship Code" dataKey="id" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            [globalFilterFields]="['Ship Name']">
+            <ng-template pTemplate="caption">
+              <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text"  placeholder="Search keyword" />
+                </span>
+              </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th [pSortableColumn]="'Ship Code'">Ship Code <p-sortIcon [field]="'Ship Code'"></p-sortIcon></th>
+                <th [pSortableColumn]="'Ship Name'">Ship Name <p-sortIcon [field]="'Ship Name'"></p-sortIcon></th>
+                <th [pSortableColumn]="'Length (in meters)'">Length (in meters) <p-sortIcon [field]="'Length (in meters)'"></p-sortIcon></th>
+                <th [pSortableColumn]="'Width (in meters)'">Width (in meters)<p-sortIcon [field]="'Width (in meters)'"></p-sortIcon></th>
+                <th>Actions</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-ship>
+              <tr>
+                <td>{{ship.shipCode}}</td>
+                <td>{{ship.shipName}}</td>
+                <td>{{ship.shipLengthInMeters}}</td>
+                <td>{{ship.shipWidthInMeters}}</td>
+                <td>
+                  <app-actions [isDeleteEnabled]="true" [isEditEnabled]="true"
+                               (onEditClicked)="goToEditShip(ship.shipCode)" (onDeleteClicked)="deleteShip(ship.shipCode)">
+                  </app-actions>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
         </div>
       </div>
     </div>
