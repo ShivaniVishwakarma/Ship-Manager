@@ -1,4 +1,4 @@
-package com.hpc.shipservice.entity;
+package com.hpc.shipservice.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

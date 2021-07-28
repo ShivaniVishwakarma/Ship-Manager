@@ -1,10 +1,8 @@
 package com.hpc.shipservice.service;
 
-import com.hpc.shipservice.entity.Ship;
+import com.hpc.shipservice.entities.Ship;
 import com.hpc.shipservice.models.Response;
-import com.hpc.shipservice.repository.ShipRepository;
-import com.hpc.shipservice.repository.UserRepository;
-import com.hpc.shipservice.util.JwtTokenUtil;
+import com.hpc.shipservice.repositories.ShipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,21 +23,6 @@ public class ShipService {
     @Autowired
     ShipRepository shipRepository;
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    JwtTokenUtil jwtTokenUtil;
-
-    @Autowired
-    JwtUserDetailsService userDetailsService;
-
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
     public ResponseEntity<Response> addNewShipInfo(Ship ship) {
         Response response = new Response();
         Ship newShip = shipRepository.save(ship);
@@ -53,7 +34,7 @@ public class ShipService {
             response.setMessage("Ship Added Successfully");
             response.setStatus(true);
             response.setData(newShip);
-        }else {
+        } else {
             response.setMessage("Failed to add ship");
             response.setStatus(false);
         }
@@ -112,38 +93,6 @@ public class ShipService {
     public ResponseEntity<?> deleteShipInfo(String shipCode) {
         return ResponseEntity.ok(shipRepository.deleteShipByShipCode(shipCode));
     }
-/*
-    public ResponseEntity<?> authenticate(JwtRequest u) {
-        Response response = new Response();
-        String jwt = null;
-        System.out.println(bCryptPasswordEncoder.encode(u.getPassword()));
-        Optional<User> user = userRepository.getUserByUsername(u.getUsername(), bCryptPasswordEncoder.encode(u.getPassword()));
-        if (!user.isPresent()) {
-            response.setMessage("Invalid username or password");
-        } else {
-            try {
-                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(u.getUsername(), u.getPassword()));
-            } catch (BadCredentialsException e) {
-                e.printStackTrace();
-                response.setMessage("Invalid password");
-            }
-
-            UserDetails userDetails = userDetailsService.loadUserByUsername(u.getUsername());
-            System.out.println("userDetails : " + userDetails);
-            jwt = jwtTokenUtil.generateToken(userDetails);
-            String temp = "$2a$10$2SKDbWdrk3TLV0LiS5KJ2uHvCadmjvChu8FN2EVtloK3yob9mXfxq";
-            response.setData(temp);
-            response.setStatus(true);
-            String uname = "admin";
-            System.out.println("username from token : " + jwtTokenUtil.getUsernameFromToken(jwt));
-            //response.setData(jwt);
-            response.setMessage("Authentication success");
-            //System.out.println(jwt);
-        }
-        return ResponseEntity.ok(response);
-    }
-
- */
 
     public ResponseEntity<List<Ship>> getAllSortedShips(String[] sort) {
         try {

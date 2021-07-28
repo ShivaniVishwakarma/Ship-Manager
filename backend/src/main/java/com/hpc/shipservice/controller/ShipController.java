@@ -1,16 +1,18 @@
 package com.hpc.shipservice.controller;
 
-import com.hpc.shipservice.entity.Ship;
+import com.hpc.shipservice.entities.Ship;
 import com.hpc.shipservice.service.ShipService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 import java.util.Collection;
 import java.util.List;
 
-@CrossOrigin(origins = "**")
+@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 @RestController
 @RequestMapping("/ships")
 public class ShipController {

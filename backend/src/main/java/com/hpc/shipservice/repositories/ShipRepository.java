@@ -1,6 +1,6 @@
-package com.hpc.shipservice.repository;
+package com.hpc.shipservice.repositories;
 
-import com.hpc.shipservice.entity.Ship;
+import com.hpc.shipservice.entities.Ship;
 import com.hpc.shipservice.models.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
