@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from "@angular/router";
-import { ToastrService } from 'ngx-toastr';
-
-import { ShipService } from '../../services/ship.service';
-import { Ship } from '../../ship.model';
-import { Constants } from '../../../core/constants';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from "@angular/router";
+import {ToastrService} from 'ngx-toastr';
+import {ShipService} from '../../services/ship.service';
+import {Ship} from '../../ship.model';
+import {Constants} from '../../../core/constants';
 
 @Component({
   selector: 'app-ship-add',
@@ -17,9 +16,9 @@ export class ShipAddComponent implements OnInit {
   public shipForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private shipService: ShipService,
-    private toastrService: ToastrService,
-    private router: Router) {
+              private shipService: ShipService,
+              private toastrService: ToastrService,
+              private router: Router) {
     this.shipForm = this.fb.group({
       shipName: ['', Validators.required],
       shipLengthInMeters: ['', Validators.required],

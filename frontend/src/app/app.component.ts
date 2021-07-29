@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationEnd, Router, RouterState } from '@angular/router';
+import {Component} from '@angular/core';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, NavigationEnd, Router, RouterState} from '@angular/router';
 
 @Component({
   selector: 'app-root',

@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './core/guards/auth.guard';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from './core/guards/auth.guard';
 
-import { NoRouteFoundComponent } from './no-route/NoRouteFoundCompoent';
+import {NoRouteFoundComponent} from './no-route/NoRouteFoundCompoent';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  {path: '', redirectTo: 'auth', pathMatch: 'full'},
   {
     path: 'ships', loadChildren: () => import('./ship/ship.module').then(m => m.ShipModule),
     canActivate: [AuthGuard]
@@ -13,11 +13,12 @@ const routes: Routes = [
   {
     path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
-  { path: '**', component: NoRouteFoundComponent }
+  {path: '**', component: NoRouteFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

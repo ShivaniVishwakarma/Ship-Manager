@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { JWTUtils } from 'src/app/core/services/jwt.utils';
-import { StorageService } from 'src/app/core/services/storage.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {JWTUtils} from 'src/app/core/services/jwt.utils';
+import {StorageService} from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-menu',
@@ -17,7 +17,8 @@ export class MenuComponent implements OnInit {
     private jwtUtils: JWTUtils,
     private localStorageService: StorageService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.loggedInUser = this.jwtUtils.decodeJwt(this.localStorageService.getAccessToken()).sub;

@@ -1,13 +1,10 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-
-import { Observable } from 'rxjs';
-
-import { Ship } from "../ship.model";
-
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from 'rxjs';
+import {Ship} from "../ship.model";
 import Page from "./../../models/page.model";
-import { Response } from "./../../utils/response.model";
-import { environment } from "../../../environments/environment";
+import {Response} from "./../../utils/response.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ShipService {
@@ -17,23 +14,8 @@ export class ShipService {
   constructor(private http: HttpClient) {
   }
 
-  getShipList1(page: Page): Observable<Response> {
-    return this.http.get<Response>(`${this.apiServerUrl}/getAllShipsPage?shipName=${page.shipName}&page=${page.page}&size=${page.size}&sort=${page.sort}`);
-  }
-
   getShipList(): Observable<Ship[]> {
     return this.http.get<Ship[]>(`${this.apiServerUrl}/getall`);
-  }
-
-  // getShips(p: { lazyEvent: string }): Observable<Response> {
-  //   return this.http.get<Response>(`${this.apiServerUrl}/getallships`);
-  // }
-
-  getShips() {
-    return this.http.get<any>(`${this.apiServerUrl}/getallships`)
-      .toPromise()
-      .then(res => <Ship[]>res.data)
-      .then(data => { return data; });
   }
 
   getShip(shipCode: string): Observable<Response> {
@@ -52,4 +34,9 @@ export class ShipService {
   deleteShip(shipCode: string): Observable<Response> {
     return this.http.delete<Response>(`${this.apiServerUrl}/delete/${shipCode}`);
   }
+
+  getPaginatedShipData(page: Page): Observable<Response> {
+    return this.http.get<Response>(`${this.apiServerUrl}/getAllShipsPage?shipName=${page.shipName}&page=${page.page}&size=${page.size}&sort=${page.sort}`);
+  }
+
 }

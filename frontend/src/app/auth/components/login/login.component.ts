@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { ToastrService } from 'ngx-toastr';
 import { Constants } from '../../../core/constants';
-
 import { StorageService } from '../../../core/services/storage.service';
 import { AuthService } from '../../services/auth.service';
 import { User } from "../../user.model";
-
-
 
 @Component({
   selector: 'app-auth-login',
@@ -54,7 +50,7 @@ export class LoginComponent implements OnInit {
             this.authForm.reset();
             this.updateToken(response.token);
             this.isLoggedIn = true;
-            this.toasterService.success("You logged in successfully.", Constants.TITLE_SUCCESS);
+            this.toasterService.success("Login successfull", Constants.TITLE_SUCCESS);
           } else {
             this.toasterService.error("Invalid username or password", Constants.TITLE_ERROR);
           }
@@ -62,7 +58,7 @@ export class LoginComponent implements OnInit {
           this.toasterService.error('Error while login', Constants.TITLE_ERROR);
         });
     } else {
-      this.toasterService.warning("Please fill form, something is missing or invalid", Constants.TITLE_ERROR);
+      this.toasterService.warning("Please fill all form fields, something is missing or invalid", Constants.TITLE_ERROR);
     }
   }
 

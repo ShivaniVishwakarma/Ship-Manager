@@ -1,7 +1,6 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-
 import { StorageService } from "../services/storage.service";
 
 
@@ -21,8 +20,3 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 }
-
-  //intercept() gets HTTPRequest object, change it and forward to HttpHandler object’s handle() method.
-// It transforms HTTPRequest object into an Observable<HttpEvents>.
-//next: HttpHandler object represents the next interceptor in the chain of interceptors.
-// The final ‘next’ in the chain is the Angular HttpClient.

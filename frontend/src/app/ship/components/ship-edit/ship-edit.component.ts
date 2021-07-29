@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Constants } from '../../../core/constants';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Constants} from '../../../core/constants';
 
-import { ShipService } from '../../services/ship.service';
-import { Ship } from '../../ship.model';
+import {ShipService} from '../../services/ship.service';
+import {Ship} from '../../ship.model';
 
 @Component({
   selector: 'app-ship-edit',
@@ -17,10 +17,10 @@ export class ShipEditComponent implements OnInit {
   public shipForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private shipService: ShipService,
-    private activateRoute: ActivatedRoute,
-    private toastrService: ToastrService,
-    private router: Router) {
+              private shipService: ShipService,
+              private activateRoute: ActivatedRoute,
+              private toastrService: ToastrService,
+              private router: Router) {
     this.shipForm = this.fb.group({
       shipCode: ['', Validators.required],
       shipName: ['', Validators.required],
@@ -43,7 +43,7 @@ export class ShipEditComponent implements OnInit {
           this.toastrService.error(response.message && 'Error while fetching ship details', Constants.TITLE_ERROR);
         }
       }, error => {
-        this.toastrService.error("Error while updating ship", Constants.TITLE_ERROR);
+        this.toastrService.error("Error while updating ship details", Constants.TITLE_ERROR);
       });
   }
 
@@ -59,10 +59,10 @@ export class ShipEditComponent implements OnInit {
             this.toastrService.error(response.message, Constants.TITLE_ERROR);
           }
         }, error => {
-          this.toastrService.error("Error while updating ship", Constants.TITLE_ERROR);
+          this.toastrService.error("Error while updating ship details", Constants.TITLE_ERROR);
         });
     } else {
-      this.toastrService.error("Please fill form, something is missing or invalid", Constants.TITLE_ERROR);
+      this.toastrService.error("Please fill all form fields, something is missing or invalid", Constants.TITLE_ERROR);
     }
   }
 
