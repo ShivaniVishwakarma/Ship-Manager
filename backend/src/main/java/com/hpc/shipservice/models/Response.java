@@ -6,10 +6,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * @author Shivani Vishwakarma
- * @apiNote Response class to hold data which would be sent to requested client
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

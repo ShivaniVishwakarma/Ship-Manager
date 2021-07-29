@@ -45,15 +45,6 @@ public class ShipService {
         return shipRepository.findAll();
     }
 
-    public ResponseEntity<?> getAllShips() {
-        List<Ship> ships = shipRepository.findAll();
-        Response response = new Response();
-        response.setData(ships);
-        response.setStatus(true);
-        return ResponseEntity.ok(response);
-
-    }
-
     public ResponseEntity<?> getShipByShipCode(String shipCode) {
         Response response = new Response();
         Optional<Ship> s = shipRepository.findByShipCode(shipCode);
@@ -103,43 +94,12 @@ public class ShipService {
         return ResponseEntity.ok(shipRepository.deleteShipByShipCode(shipCode));
     }
 
-    public ResponseEntity<List<Ship>> getAllSortedShips(String[] sort) {
-        try {
-            List<Sort.Order> orders = new ArrayList<Sort.Order>();
-
-            if (sort[0].contains(",")) {
-                // will sort more than 2 fields
-                // sortOrder="field, direction"
-                //localhost:8080/ships/getAllSortedShips?sort=id,desc&sort=shipCode,desc
-                for (String sortOrder : sort) {
-                    String[] _sort = sortOrder.split(",");
-                    orders.add(new Sort.Order(getSortDirection(_sort[1]), _sort[0]));
-                }
-            } else {
-                //localhost:8080/ships/getAllSortedShips?sort=id,desc
-                // sort=[field, direction]
-                orders.add(new Sort.Order(getSortDirection(sort[1]), sort[0]));
-            }
-
-            List<Ship> Ships = shipRepository.findAll(Sort.by(orders));
-
-            if (Ships.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(Ships, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     private Sort.Direction getSortDirection(String direction) {
         if (direction.equals("asc")) {
             return Sort.Direction.ASC;
         } else if (direction.equals("desc")) {
             return Sort.Direction.DESC;
         }
-
         return Sort.Direction.ASC;
     }
 
@@ -148,40 +108,25 @@ public class ShipService {
         Response resp = new Response();
         try {
             List<Sort.Order> orders = new ArrayList<Sort.Order>();
-
             if (sort[0].contains(",")) {
-                // will sort more than 2 fields
-                // sortOrder="field, direction"
                 for (String sortOrder : sort) {
                     String[] _sort = sortOrder.split(",");
                     orders.add(new Sort.Order(getSortDirection(_sort[1]), _sort[0]));
                 }
             } else {
-                // sort=[field, direction]
                 orders.add(new Sort.Order(getSortDirection(sort[1]), sort[0]));
             }
-
-            List<Ship> shipList = new ArrayList<Ship>();
             Pageable pagingSort = PageRequest.of(page, size, Sort.by(orders));
-
             Page<Ship> pageShips;
             if (shipName == null)
                 pageShips = shipRepository.findAll(pagingSort);
             else
                 pageShips = shipRepository.findByShipNameContaining(shipName, pagingSort);
 
-            shipList = pageShips.getContent();
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("Ships", shipList);
-            response.put("currentPage", pageShips.getNumber());
-            response.put("totalItems", pageShips.getTotalElements());
-            response.put("totalPages", pageShips.getTotalPages());
-
+            List<Ship> shipList = pageShips.getContent();
             resp.setData(shipList);
             resp.setStatus(true);
             resp.setMessage("Successfully retrieved ship info");
-
             return new ResponseEntity(resp, HttpStatus.OK);
 
         } catch (Exception e) {

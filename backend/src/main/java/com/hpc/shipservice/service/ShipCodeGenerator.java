@@ -11,10 +11,12 @@ public class ShipCodeGenerator {
     @Autowired
     Map<Integer,String> codes;
 
+    private final Integer MAX_CODES = 234;
+    private final String PREFIX = "SHIP-";
+
     public String generateShipCode(Integer id){
-        int max = 234;
-        int i  = (Integer) (id/max) + 1000;
-        String c = codes.get(id%max);
-        return "SHIP-" + i + "-" + c;
+        int i  = (id / MAX_CODES) + 1000;
+        String c = codes.get(id % MAX_CODES);
+        return PREFIX + i + "-" + c;
     }
 }
