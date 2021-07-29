@@ -1,33 +1,44 @@
-<div class="card">
-  <div class="card-body">
-    <span class="card-title"> Login </span>
-
-    <form class="row col-md-6" [formGroup]="authForm" (ngSubmit)="login(authForm)" novalidate>
-      <div class="row mb-3">
-        <div class="col-md-4"><label for="username" class="form-label text-muted">UserName</label>
-        </div>
-        <div class="col-md-8">
-          <input type="text" name="username" id="username" formControlName="username" class="form-control"
-            placeholder="Enter User Name" autocomplete="false" />
-
-
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-md-4"><label for="password" class="form-label text-muted">Password</label></div>
-        <div class="col-md-8">
-          <input type="password" name="password" id="password" formControlName="password" class="form-control"
-            placeholder="Enter Password" autocomplete="false" />
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-md-4"></div>
-        <div class="col-md-3">
-          <button class="btn btn-primary" type="submit"> Login </button>
-        </div>
-      </div>
-    </form>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/auth/"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <label><h3>Ship Manager</h3></label>
+        </li>
+      </ul>
+    </div>
   </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <!--<span class="card-title"> Login </span>-->
+          <form [formGroup]="authForm" (ngSubmit)="login(authForm)" novalidate>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" name="username" id="username" formControlName="username" class="form-control"
+                     placeholder="Enter Username" autocomplete="false" />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" name="password" id="password" formControlName="password" class="form-control"
+                     placeholder="Enter Password" autocomplete="false" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+
 </div>

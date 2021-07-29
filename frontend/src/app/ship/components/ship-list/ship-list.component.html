@@ -1,25 +1,25 @@
 <div class="container">
   <div class="panel">
-    <div class="panel-header">
-      <span class="panel-title"> Ship List</span>
-    </div>
+
     <br/>
     <div class="panel-body">
       <div class="row">
         <div class="col-md-12">
 
           <p-table #dt [value]="ships" dataKey="id" [rowHover]="true" [loading]="loading" sortMode="multiple"
-                   [filterDelay]="0" [rows]="2" [totalRecords]="8" [showCurrentPageReport]="true"
+                   [filterDelay]="0" [rows]="2" [totalRecords]="totalRecords" [showCurrentPageReport]="true"
                    [rowsPerPageOptions]="[2,4,6]"
                    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                    [globalFilterFields]="['shipName']" (onPage)="loadShips($event)">
 
             <ng-template pTemplate="caption">
               <div class="p-d-flex">
-                <span class="p-input-icon-left p-ml-auto">
-                    <i class="pi pi-search"></i>
+                <span class=" p-ml-auto input-group">
+
                     <input pInputText type="text" #mm (input)="dt.filterGlobal(mm.value, 'contains')"
-                           placeholder="Search keyword"/>
+                           placeholder="Search keyword" class="form-control col-sm-3"/>
+                   <span class="input-group-text"><i class="pi pi-search"></i></span>
+
               </span>
               </div>
             </ng-template>

@@ -7,6 +7,7 @@ import { AuthService } from "./services/auth.service";
 import { AuthRoutingModule } from "./auth-routing.module";
 import { AuthComponent } from "./auth.component";
 import { LoginComponent } from "./components/login/login.component";
+import {ShipModule} from "../ship/ship.module";
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { LoginComponent } from "./components/login/login.component";
         CommonModule,
         AuthRoutingModule,
         HttpClientModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ShipModule
     ],
     bootstrap: [AuthComponent]
 })

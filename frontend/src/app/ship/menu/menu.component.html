@@ -1,21 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/ships/">{{title}}</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" routerLink="/ships/list">Ship List</a>
-                </li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/ships/">{{title}}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/ships/list">Ship List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/ships/add">Add New Ship</a>
+        </li>
+      </ul>
 
-                <li class="nav-item active">
-                    <a class="nav-link" routerLink="/ships/add">Add New Ship</a>
-                </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item">{{loggedInUser}} </li> <span class="clearfix"></span>
-                <li class="nav-item" (click)="logOut()"> <a class="nav-link">Log Out </a></li>
-            </ul>
-        </div>
+      <div class="d-flex ml-auto">
+        <label class="btn btn-light">welcome: {{loggedInUser}} </label>
+        <a class="btn btn-light" (click)="logOut()">Log Out</a>
+      </div>
     </div>
+  </div>
 </nav>

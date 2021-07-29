@@ -16,29 +16,32 @@ import { FormsModule } from '@angular/forms';
 import {PaginatorModule} from 'primeng/paginator';
 
 @NgModule({
-  declarations: [
-    MenuComponent,
-    ShipComponent,
-    ShipListComponent,
-    ShipAddComponent,
-    ShipEditComponent,
-    ActionComponent
-  ],
-  providers: [ShipService,
-    [{
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }]],
-  imports: [
-    CommonModule,
-    ShipRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    TableModule,
-    FormsModule,
-    PaginatorModule
-  ],
-  bootstrap: [ShipComponent]
+    declarations: [
+        MenuComponent,
+        ShipComponent,
+        ShipListComponent,
+        ShipAddComponent,
+        ShipEditComponent,
+        ActionComponent
+    ],
+    providers: [ShipService,
+        [{
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        }]],
+    imports: [
+        CommonModule,
+        ShipRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        TableModule,
+        FormsModule,
+        PaginatorModule
+    ],
+    exports: [
+        MenuComponent
+    ],
+    bootstrap: [ShipComponent]
 })
 export class ShipModule { }

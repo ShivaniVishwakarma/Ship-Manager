@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
           if (response.token) {
             this.authForm.reset();
             this.updateToken(response.token);
+            this.isLoggedIn = true;
             this.toasterService.success("You logged in successfully.", Constants.TITLE_SUCCESS);
           } else {
             this.toasterService.error("Invalid username or password", Constants.TITLE_ERROR);

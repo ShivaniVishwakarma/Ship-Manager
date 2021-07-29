@@ -22,10 +22,6 @@ export class ShipListComponent implements OnInit {
   ships: Ship[] = [];
   searchStr: string = '';
 
-  // @ViewChild('dt') table: Table | undefined;
-
-
-
   page: Page = {
     page: 0,
     size: 4,
@@ -46,10 +42,10 @@ export class ShipListComponent implements OnInit {
   }
 
   getShipList() {
-    this.shipService.getShipList1(this.page)
+    this.shipService.getShipList()
       .subscribe(response => {
-        this.ships = response.data;
-        //this.totalRecords = ; //this.ships.length;
+        this.ships = response;
+        this.totalRecords = this.ships.length;
 
         console.log("Ships: ", this.ships);
         if (!this.ships.length) {
