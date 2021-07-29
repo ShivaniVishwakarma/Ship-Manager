@@ -6,5 +6,5 @@ import { Component } from "@angular/core";
             <router-outlet> </router-outlet>`
 })
 export class ShipComponent {
-    title: string = 'Ship Manager';
+    title: string = 'SHIP MANAGER';
 }

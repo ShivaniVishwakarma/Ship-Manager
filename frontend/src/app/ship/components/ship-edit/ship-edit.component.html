@@ -1,44 +1,52 @@
-<div class="panel-default">
-    <div class="panel-header">
-        <span class="panel-title"> Edit Ship Details</span>
-    </div>
-    <div class="panel-body">
-        <form [formGroup]="shipForm" (ngSubmit)="editShip(shipForm)" novalidate>
+<div class="container mt-9">
+  <div class="row p-5">
+    <div class="col-md-6"></div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="shipForm" (ngSubmit)="editShip(shipForm)" novalidate>
+            <div class="mb-3">
 
-            <div class="row form-group">
+              <div class="row  p-2" >
                 <div class="col-md-4"><label for="shipCode" class="field-label text-muted">Ship Code</label></div>
                 <div class="col-md-8">
-                    <input type="text" name="shipCode" id="shipCode" formControlName="shipCode" class="form-control" />
+                  <input type="text" name="shipCode" id="shipCode" formControlName="shipCode" class="form-control" />
                 </div>
-            </div>
+              </div>
 
-            <div class="row">
+              <div class="row p-2">
                 <div class="col-md-4"><label for="shipName" class="field-label text-muted">Name</label></div>
                 <div class="col-md-8">
-                    <input type="text" name="shipName" id="shipName" formControlName="shipName" class="form-control"
-                        placeholder="Enter Name" />
+                  <input type="text" name="shipName" id="shipName" formControlName="shipName" class="form-control"
+                         placeholder="Enter Name" />
                 </div>
-            </div>
+              </div>
 
-            <div class="row">
+              <div class="row p-2">
                 <div class="col-md-4"><label for="shipLengthInMeters" class="field-label text-muted">Length</label></div>
                 <div class="col-md-8">
-                    <input type="number" name="shipLengthInMeters" id="shipLengthInMeters" formControlName="shipLengthInMeters" class="form-control"
-                        placeholder="Enter Length" />
+                  <input type="number" name="shipLengthInMeters" id="shipLengthInMeters" formControlName="shipLengthInMeters" class="form-control"
+                         placeholder="Enter Length" />
                 </div>
-            </div>
+              </div>
 
-            <div class="row">
+              <div class="row p-2" >
                 <div class="col-md-4"><label for="shipWidthInMeters" class="field-label text-muted">Width</label></div>
                 <div class="col-md-8">
-                    <input type="number" name="shipWidthInMeters" id="shipWidthInMeters" formControlName="shipWidthInMeters" class="form-control"
-                        placeholder="Enter Width" />
+                  <input type="number" name="shipWidthInMeters" id="shipWidthInMeters" formControlName="shipWidthInMeters" class="form-control"
+                         placeholder="Enter Width" />
                 </div>
-            </div>
+              </div>
 
-            <div class="row col-md-3 center">
+              <div class="row col-md-3 center">
                 <button class="btn btn-primary" type="submit"> Update </button>
+              </div>
             </div>
-        </form>
+          </form>
+        </div>
+      </div>
     </div>
+    <div class="col-md-3"></div>
+  </div>
+
 </div>
