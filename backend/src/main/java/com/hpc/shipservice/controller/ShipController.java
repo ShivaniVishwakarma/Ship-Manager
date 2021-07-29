@@ -26,7 +26,6 @@ public class ShipController {
     //Add new ship info
     @PostMapping("/add")
     public ResponseEntity<?> addNewShipInfo(@RequestBody Ship ship){
-        System.out.println("Ship info : " + ship);
         return shipService.addNewShipInfo(ship);
     }
 

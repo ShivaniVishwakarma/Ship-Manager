@@ -12,8 +12,7 @@ public class ShipCodeGenerator {
     Map<Integer,String> codes;
 
     public String generateShipCode(Integer id){
-
-        int max = 18;
+        int max = 234;
         int i  = (Integer) (id/max) + 1000;
         String c = codes.get(id%max);
         return "SHIP-" + i + "-" + c;
