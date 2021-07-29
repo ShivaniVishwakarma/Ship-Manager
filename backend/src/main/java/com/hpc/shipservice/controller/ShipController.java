@@ -2,12 +2,11 @@ package com.hpc.shipservice.controller;
 
 import com.hpc.shipservice.entities.Ship;
 import com.hpc.shipservice.service.ShipService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -35,8 +34,12 @@ public class ShipController {
     @GetMapping("/getall")
     //@PreAuthorize("hasAuthority('ADMIN')")
     public Collection<Ship> getShips() {
-        System.out.println(bCryptPasswordEncoder.encode("admin"));
         return shipService.getShips();
+    }
+
+    @GetMapping("/getallships")
+    public ResponseEntity<?> getAllShips() {
+        return shipService.getAllShips();
     }
 
     //Fetch ship by ShipCode
@@ -65,10 +68,10 @@ public class ShipController {
 
     //Get all ships page
     @GetMapping("/getAllShipsPage")
-    public ResponseEntity<List<Ship>> getAllShipsPage(@RequestParam(required = false) String shipName,
-                                                      @RequestParam(defaultValue = "0") int page,
-                                                      @RequestParam(defaultValue = "2") int size,
-                                                      @RequestParam(defaultValue = "id,desc") String[] sort) {
+    public ResponseEntity<?> getAllShipsPage(@RequestParam(required = false) String shipName,
+                                                    @RequestParam(defaultValue = "0") int page,
+                                                    @RequestParam(defaultValue = "2") int size,
+                                                    @RequestParam(defaultValue = "id,desc") String[] sort) {
         return shipService.getAllShipsPage(shipName,page,size,sort);
     }
 }

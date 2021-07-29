@@ -17,13 +17,23 @@ export class ShipService {
   constructor(private http: HttpClient) {
   }
 
-  getShipList1(page: Page): Observable<Ship[]> {
-    return this.http.get<Ship[]>(`${this.apiServerUrl}/getAllShipsPage?shipName=${page.shipName}&page=${page.page}&size=${page.size}&sort=${page.sort}`);
+  getShipList1(page: Page): Observable<Response> {
+    return this.http.get<Response>(`${this.apiServerUrl}/getAllShipsPage?shipName=${page.shipName}&page=${page.page}&size=${page.size}&sort=${page.sort}`);
   }
-  //localhost:8080/ships/getAllShipsPage?shipName=Titanic&page=0&size=2&sort=shipCode,asc
 
   getShipList(): Observable<Ship[]> {
     return this.http.get<Ship[]>(`${this.apiServerUrl}/getall`);
+  }
+
+  // getShips(p: { lazyEvent: string }): Observable<Response> {
+  //   return this.http.get<Response>(`${this.apiServerUrl}/getallships`);
+  // }
+
+  getShips() {
+    return this.http.get<any>(`${this.apiServerUrl}/getallships`)
+      .toPromise()
+      .then(res => <Ship[]>res.data)
+      .then(data => { return data; });
   }
 
   getShip(shipCode: string): Observable<Response> {

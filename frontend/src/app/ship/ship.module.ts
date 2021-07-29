@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import {NgForm, ReactiveFormsModule} from "@angular/forms";
 import { ShipAddComponent } from "./components/ship-add/ship-add.component";
 import { ShipEditComponent } from "./components/ship-edit/ship-edit.component";
 import { ShipListComponent } from "./components/ship-list/ship-list.component";
@@ -12,6 +12,8 @@ import { MenuComponent } from './menu/menu.component';
 import { ActionComponent } from "../core/shared/components/action.component";
 import { TokenInterceptor } from "../core/interceptors/token.interceptor";
 import {TableModule} from "primeng/table";
+import { FormsModule } from '@angular/forms';
+import {PaginatorModule} from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -33,8 +35,9 @@ import {TableModule} from "primeng/table";
     ShipRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    TableModule
-
+    TableModule,
+    FormsModule,
+    PaginatorModule
   ],
   bootstrap: [ShipComponent]
 })

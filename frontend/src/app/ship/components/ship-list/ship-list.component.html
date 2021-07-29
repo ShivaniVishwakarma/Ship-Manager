@@ -8,28 +8,41 @@
       <div class="row">
         <div class="col-md-12">
 
-          <p-table #dt [value]="ships" sortField= "Ship Code" dataKey="id" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
-            [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-            [globalFilterFields]="['Ship Name']">
+          <p-table #dt [value]="ships" dataKey="id" [rowHover]="true" [loading]="loading" sortMode="multiple"
+                   [filterDelay]="0" [rows]="2" [totalRecords]="8" [showCurrentPageReport]="true"
+                   [rowsPerPageOptions]="[2,4,6]"
+                   [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                   [globalFilterFields]="['shipName']" (onPage)="loadShips($event)">
+
             <ng-template pTemplate="caption">
               <div class="p-d-flex">
                 <span class="p-input-icon-left p-ml-auto">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text"  placeholder="Search keyword" />
-                </span>
+                    <input pInputText type="text" #mm (input)="dt.filterGlobal(mm.value, 'contains')"
+                           placeholder="Search keyword"/>
+              </span>
               </div>
             </ng-template>
 
             <ng-template pTemplate="header">
               <tr>
-                <th [pSortableColumn]="'Ship Code'">Ship Code <p-sortIcon [field]="'Ship Code'"></p-sortIcon></th>
-                <th [pSortableColumn]="'Ship Name'">Ship Name <p-sortIcon [field]="'Ship Name'"></p-sortIcon></th>
-                <th [pSortableColumn]="'Length (in meters)'">Length (in meters) <p-sortIcon [field]="'Length (in meters)'"></p-sortIcon></th>
-                <th [pSortableColumn]="'Width (in meters)'">Width (in meters)<p-sortIcon [field]="'Width (in meters)'"></p-sortIcon></th>
+                <th [pSortableColumn]="'shipCode'">Ship Code
+                  <p-sortIcon [field]="'shipCode'"></p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'shipName'">Ship Name
+                  <p-sortIcon [field]="'shipName'"></p-sortIcon>
+                  <p-columnFilter type="text" field="shipName" display="menu" class="p-ml-auto"></p-columnFilter>
+                </th>
+                <th [pSortableColumn]="'shipLengthInMeters'">Length (in meters)
+                  <p-sortIcon [field]="'shipLengthInMeters'"></p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'shipWidthInMeters'">Width (in meters)
+                  <p-sortIcon [field]="'shipWidthInMeters'"></p-sortIcon>
+                </th>
                 <th>Actions</th>
               </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-ship>
               <tr>
                 <td>{{ship.shipCode}}</td>
@@ -38,7 +51,8 @@
                 <td>{{ship.shipWidthInMeters}}</td>
                 <td>
                   <app-actions [isDeleteEnabled]="true" [isEditEnabled]="true"
-                               (onEditClicked)="goToEditShip(ship.shipCode)" (onDeleteClicked)="deleteShip(ship.shipCode)">
+                               (onEditClicked)="goToEditShip(ship.shipCode)"
+                               (onDeleteClicked)="deleteShip(ship.shipCode)">
                   </app-actions>
                 </td>
               </tr>

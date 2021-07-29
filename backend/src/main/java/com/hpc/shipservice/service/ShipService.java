@@ -45,6 +45,15 @@ public class ShipService {
         return shipRepository.findAll();
     }
 
+    public ResponseEntity<?> getAllShips() {
+        List<Ship> ships = shipRepository.findAll();
+        Response response = new Response();
+        response.setData(ships);
+        response.setStatus(true);
+        return ResponseEntity.ok(response);
+
+    }
+
     public ResponseEntity<?> getShipByShipCode(String shipCode) {
         Response response = new Response();
         Optional<Ship> s = shipRepository.findByShipCode(shipCode);
@@ -134,7 +143,7 @@ public class ShipService {
         return Sort.Direction.ASC;
     }
 
-    public ResponseEntity<List<Ship>> getAllShipsPage(String shipName, int page, int size, String[] sort) {
+    public ResponseEntity<?> getAllShipsPage(String shipName, int page, int size, String[] sort) {
 
         Response resp = new Response();
         try {
@@ -152,24 +161,24 @@ public class ShipService {
                 orders.add(new Sort.Order(getSortDirection(sort[1]), sort[0]));
             }
 
-            List<Ship> Ships = new ArrayList<Ship>();
+            List<Ship> shipList = new ArrayList<Ship>();
             Pageable pagingSort = PageRequest.of(page, size, Sort.by(orders));
 
-            Page<Ship> pageTuts;
+            Page<Ship> pageShips;
             if (shipName == null)
-                pageTuts = shipRepository.findAll(pagingSort);
+                pageShips = shipRepository.findAll(pagingSort);
             else
-                pageTuts = shipRepository.findByShipNameContaining(shipName, pagingSort);
+                pageShips = shipRepository.findByShipNameContaining(shipName, pagingSort);
 
-            Ships = pageTuts.getContent();
+            shipList = pageShips.getContent();
 
             Map<String, Object> response = new HashMap<>();
-            response.put("Ships", Ships);
-            response.put("currentPage", pageTuts.getNumber());
-            response.put("totalItems", pageTuts.getTotalElements());
-            response.put("totalPages", pageTuts.getTotalPages());
+            response.put("Ships", shipList);
+            response.put("currentPage", pageShips.getNumber());
+            response.put("totalItems", pageShips.getTotalElements());
+            response.put("totalPages", pageShips.getTotalPages());
 
-            resp.setData(response);
+            resp.setData(shipList);
             resp.setStatus(true);
             resp.setMessage("Successfully retrieved ship info");
 

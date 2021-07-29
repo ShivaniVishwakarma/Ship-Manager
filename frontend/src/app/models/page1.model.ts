@@ -1,5 +1,5 @@
 
-export default interface Page {
+export default interface Page1 {
     totalRecords: number;
     pageNumber: number;
     recordsPerPage: number;
