@@ -4,10 +4,10 @@ server:
 spring:
   application:
     name: ship-service
-    version: 1.0.0-SNAPSHOT
+    version: 29.07.21
     description: Ship service provides the facility to add, update, remove and view the ship details on request
   jpa:
-    showSql: true
+    showSql: false
     hibernate:
       ddl-auto: update
     generate-ddl: true

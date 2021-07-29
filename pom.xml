@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.hpc</groupId>
 	<artifactId>ship-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>29.07.21</version>
 	<name>ship-service</name>
 	<description>Ship info for HPC</description>
 	<properties>

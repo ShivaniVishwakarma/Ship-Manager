@@ -1,6 +1,6 @@
 {
   "name": "ship-manager",
-  "version": "21.07.18",
+  "version": "29.07.21",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config conf.json",
