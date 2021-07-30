@@ -6,8 +6,19 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A configuration class for creating a bean which returns the map of codes to generate ship codes
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @Configuration
 public class CustomIdGeneratorConfig {
+
+    /**
+     * A bean that generates a map of codes to be used for generating custom ship code values
+     * @return code map
+     */
 
     @Bean
     public Map<Integer,String> generateCodes(){

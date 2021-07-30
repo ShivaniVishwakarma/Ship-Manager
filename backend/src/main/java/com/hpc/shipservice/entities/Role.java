@@ -6,6 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
 
+/**
+ * An entity class for holding the user roles information
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @Entity
 public class Role {
 

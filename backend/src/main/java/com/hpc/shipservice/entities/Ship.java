@@ -9,6 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * An entity class for holding the ship information
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @Entity
 @Data
 @NoArgsConstructor

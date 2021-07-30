@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * Request model class to hold the user data which would be received from the client
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

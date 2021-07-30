@@ -15,6 +15,12 @@ import javax.persistence.GenerationType;
 
 import java.util.Set;
 
+/**
+ * An entity class for holding the user information
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @Entity
 public class User {
 

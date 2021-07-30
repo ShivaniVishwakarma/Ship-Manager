@@ -152,7 +152,6 @@ localhost:8080/ships/getAllShipsPage?shipName=&page=0&size=10&sort=shipCode,asc
 ## Few upcoming enhancements
 
 * Server side pagination
-* Ship code generation logic improvisation
 * Unit testing for backend
 * Few sonar fixes
 * Maintaining spring profiles in application.yaml

@@ -1,8 +1,8 @@
 package com.hpc.shipservice.controller;
 
 import com.hpc.shipservice.config.TokenProvider;
-import com.hpc.shipservice.entities.AuthToken;
-import com.hpc.shipservice.entities.LoginUser;
+import com.hpc.shipservice.models.LoginUser;
+import com.hpc.shipservice.models.AuthToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * Response model class to hold data which would be sent to requested client
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

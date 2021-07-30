@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * A JPA repository for handling the CRUD operations on a Ship entity
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @Repository
 public interface ShipRepository extends JpaRepository<Ship, String> {
 
