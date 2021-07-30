@@ -5,7 +5,6 @@ import com.hpc.shipservice.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -14,9 +13,6 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/ships")
 public class ShipController {
-
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private ShipService shipService;

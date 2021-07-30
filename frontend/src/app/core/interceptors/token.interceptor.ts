@@ -11,12 +11,16 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.localStorageService.getAccessToken()}`
-      }
-    });
 
+    console.log("request : ", request);
+
+    if(!request.url.includes("/authenticate")){
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.localStorageService.getAccessToken()}`
+        }
+      });
+    }
     return next.handle(request);
   }
 }
