@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
+/**
+ * Rest controller for handing ship related request from user like fetch, delete, add, update details
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 @RestController
 @RequestMapping("/ships")
@@ -17,31 +23,63 @@ public class ShipController {
     @Autowired
     private ShipService shipService;
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addNewShipInfo(@RequestBody Ship ship){
-        return shipService.addNewShipInfo(ship);
-    }
-
+    /**
+     * This is a GET api which fetches all the ship records from database and returns it to the client
+     * @return List of all the ship records present in the database
+     */
     @GetMapping("/getall")
     public Collection<Ship> getShips() {
         return shipService.getShips();
     }
 
+    /**
+     * This is a GET api which fetches the ship record based on the given shipCode and returns it to the client
+     * @param shipCode
+     * @return Ship records present for the given shipCode
+     */
     @GetMapping("/get/{shipCode}")
     public ResponseEntity<?> getShipsByShipCode(@PathVariable("shipCode") String shipCode) {
         return shipService.getShipByShipCode(shipCode);
     }
 
+    /**
+     * This is a POST api which adds a new ship record into the database
+     * @return successful response in case of successful addition, else returns failure message to client
+     */
+    @PostMapping("/add")
+    public ResponseEntity<?> addNewShipInfo(@RequestBody Ship ship){
+        return shipService.addNewShipInfo(ship);
+    }
+
+    /**
+     * This is a PUT api which updates a ship record
+     * @param ship
+     * @return successful response in case of successful update, else returns failure message to client
+     */
     @PutMapping("/update")
     public ResponseEntity<?> updateShipInfo(@RequestBody Ship ship){
         return shipService.updateShipInfo(ship);
     }
 
+    /**
+     * This is a DELETE api which deletes a ship record for a given shipCode
+     * @param shipCode
+     * @return successful response in case of successful deletion, else returns failure message to client
+     */
     @DeleteMapping("/delete/{shipCode}")
     public ResponseEntity<?> deleteShipInfo(@PathVariable("shipCode") String shipCode){
         return shipService.deleteShipInfo(shipCode);
     }
 
+    /**
+     * This is a GET api which fetches the ship record based on the below params.
+     * This method is for server side pagination
+     * @param shipName
+     * @param page
+     * @param size
+     * @param sort
+     * @return List of ship records based on matching criteria
+     */
     @GetMapping("/getAllShipsPage")
     public ResponseEntity<?> getAllShipsPage(@RequestParam(required = false) String shipName,
                                                     @RequestParam(defaultValue = "0") int page,

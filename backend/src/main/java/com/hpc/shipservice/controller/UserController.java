@@ -1,8 +1,8 @@
 package com.hpc.shipservice.controller;
 
 import com.hpc.shipservice.config.TokenProvider;
-import com.hpc.shipservice.models.LoginUser;
 import com.hpc.shipservice.models.AuthToken;
+import com.hpc.shipservice.models.LoginUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +11,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * Rest controller for handing user authentication request while login
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
 
 @Slf4j
 @RestController
@@ -27,7 +33,13 @@ public class UserController {
     @Autowired
     private TokenProvider jwtTokenUtil;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    /**
+     * This is a POST api for which taken in the user credentials, validates it, generates token and returns it to the user.
+     * @param loginUser
+     * @return Returns a JWT token on successful login
+     * @throws AuthenticationException
+     */
+    @PostMapping("/authenticate")
     public ResponseEntity<?> generateToken(@RequestBody LoginUser loginUser) throws AuthenticationException {
         log.info(loginUser.toString());
         final Authentication authentication = authenticationManager.authenticate(
