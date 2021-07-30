@@ -16,7 +16,7 @@ import java.util.Optional;
  */
 
 @Repository
-public interface ShipRepository extends JpaRepository<Ship, String> {
+public interface ShipRepository extends JpaRepository<Ship, Integer> {
 
     Optional<Ship> findByShipCode(String shipCode);
 
