@@ -1,4 +1,4 @@
---drop table if exists user_roles;
+drop table if exists users_roles;
 --drop table if exists role;
 --drop table if exists user;
 --drop table if exists ship;
