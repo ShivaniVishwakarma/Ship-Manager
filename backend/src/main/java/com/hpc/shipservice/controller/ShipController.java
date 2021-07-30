@@ -72,12 +72,12 @@ public class ShipController {
     }
 
     /**
-     * This is a GET api which fetches the ship record based on the below params.
+     * This is a GET api which fetches the ship records based on the below params.
      * This method is for server side pagination
-     * @param shipName
-     * @param page
-     * @param size
-     * @param sort
+     * @param shipName - search string
+     * @param page - page number to be retrieved
+     * @param size - number of records per page
+     * @param sort - sorting field if any along with order
      * @return List of ship records based on matching criteria
      */
     @GetMapping("/getAllShipsPage")

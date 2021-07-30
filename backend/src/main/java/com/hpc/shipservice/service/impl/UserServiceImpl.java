@@ -19,6 +19,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Service for handing user related operations
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
 
@@ -31,6 +37,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Autowired
     private BCryptPasswordEncoder bcryptEncoder;
 
+    /**
+     * Find the user details like credentials, active status and password expiration information by given username
+     * @param username
+     * @return UserDetails
+     * @throws UsernameNotFoundException
+     */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if(user == null){
@@ -39,6 +51,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
     }
 
+    /**
+     * Fetches the list of authorities a user has depending on user role
+     * @param user
+     * @return authorities
+     */
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         user.getRoles().forEach(role -> {
@@ -47,17 +64,31 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return authorities;
     }
 
+    /**
+     * Fetches all the user in the database
+     * @return list of users
+     */
     public List<User> findAll() {
         List<User> list = new ArrayList<>();
         userRepository.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
 
+    /**
+     * Finds user by username
+     * @param username
+     * @return
+     */
     @Override
     public User findOne(String username) {
         return userRepository.findByUsername(username);
     }
 
+    /**
+     * Saves the user information in the database
+     * @param user
+     * @return
+     */
     @Override
     public User save(UserDto user) {
 

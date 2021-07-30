@@ -15,6 +15,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * Service for handing ship related operations
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @Service
 public class ShipServiceImpl implements ShipService {
 
@@ -24,6 +30,11 @@ public class ShipServiceImpl implements ShipService {
     @Autowired
     ShipRepository shipRepository;
 
+    /**
+     * Method for adding a new ship in the database. It makes use of the ship code generator to generate unique ship code.
+     * @param ship
+     * @return successful response in case of successful addition, else returns failure message in response entity
+     */
     public ResponseEntity<Response> addNewShipInfo(Ship ship) {
         Response response = new Response();
         Ship newShip = shipRepository.save(ship);
@@ -42,10 +53,18 @@ public class ShipServiceImpl implements ShipService {
         return ResponseEntity.ok(response);
     }
 
+    /** Method for finding all the list of ships in the database
+     * @return List of ships
+     */
     public Collection<Ship> getShips() {
         return shipRepository.findAll();
     }
 
+    /**
+     * Method for finding a ship record for the given ship code.
+     * @param shipCode
+     * @return successful response in case of successful retrieval, else returns failure message in response entity
+     */
     public ResponseEntity<?> getShipByShipCode(String shipCode) {
         Response response = new Response();
         Optional<Ship> s = shipRepository.findByShipCode(shipCode);
@@ -60,6 +79,11 @@ public class ShipServiceImpl implements ShipService {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Method for finding a ship record for the given ship code.
+     * @param shipCode
+     * @return ship in case of successful retrieval, else returns failure
+     */
     public Optional<Ship> getShip(String shipCode) {
         Response response = new Response();
         Optional<Ship> s = shipRepository.findByShipCode(shipCode);
@@ -74,6 +98,11 @@ public class ShipServiceImpl implements ShipService {
         return s;
     }
 
+    /**
+     * Method for finding a ship record with given ship details
+     * @param ship
+     * @return successful response in case of successful retrieval, else returns failure message in response entity
+     */
     public ResponseEntity<?> updateShipInfo(Ship ship) {
         Response response = new Response();
         Optional<Ship> s = getShip(ship.getShipCode());
@@ -91,10 +120,20 @@ public class ShipServiceImpl implements ShipService {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Method for deleting a ship record with given ship code
+     * @param shipCode
+     * @return successful response in case of successful retrieval, else returns failure message in response entity
+     */
     public ResponseEntity<?> deleteShipInfo(String shipCode) {
         return ResponseEntity.ok(shipRepository.deleteShipByShipCode(shipCode));
     }
 
+    /**
+     * Method for converting direction in the api param from asc to Sort.Direction.ACS and desc to Sort.Direction.DESC
+     * @param direction
+     * @return sort direction
+     */
     private Sort.Direction getSortDirection(String direction) {
         if (direction.equals("asc")) {
             return Sort.Direction.ASC;
@@ -104,6 +143,15 @@ public class ShipServiceImpl implements ShipService {
         return Sort.Direction.ASC;
     }
 
+    /**
+     * Method to fetch the ship records based on the below params.
+     * This method is created for server side pagination.
+     * @param shipName - search string
+     * @param page - page number to be retrieved
+     * @param size - number of records per page
+     * @param sort - sorting field if any along with order
+     * @return successful response in case of successful retrieval, else returns failure message in response entity
+     */
     public ResponseEntity<?> getAllShipsPage(String shipName, int page, int size, String[] sort) {
 
         Response resp = new Response();
