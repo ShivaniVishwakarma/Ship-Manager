@@ -5,7 +5,7 @@
 
 --create table role (id bigint not null auto_increment, description varchar(255), name varchar(255), primary key (id));
 --create table user_roles (user_id bigint not null, role_id bigint not null, primary key (user_id, role_id));
---create table user(id int, username varchar2(40) , password varchar2(80), is_active boolean, primary key (id));
+--create table if not exists user(id int, username varchar2(40) , password varchar2(80), is_active boolean, primary key (id));
 
 --INSERT INTO role (id, description, name) VALUES (1, 'Admin role', 'ADMIN');
 --INSERT INTO role (id, description, name) VALUES (2, 'User role', 'USER');
@@ -17,3 +17,5 @@
 
 --Insert Into user_roles (user_id , role_id) values (1, 1); -- mapping shivani user with ADMIN role
 --Insert Into user_roles (user_id , role_id) values (2, 2); -- mapping demo user with USER role
+
+--ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1;
