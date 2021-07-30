@@ -16,6 +16,13 @@ import java.util.Date;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * The JwtTokenUtil is responsible for performing JWT operations like creation and validation.
+ * It makes use of the io.jsonwebtoken.Jwts for achieving this.
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
+
 @Component
 public class TokenProvider implements Serializable {
 
@@ -28,10 +35,20 @@ public class TokenProvider implements Serializable {
     @Value("${jwt.authorities.key}")
     public String AUTHORITIES_KEY;
 
+    /**
+     * retrieve username from jwt token
+     * @param token
+     * @return username
+     */
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
+    /**
+     * retrieve expiration date from jwt token
+     * @param token
+     * @return expiration date
+     */
     public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
@@ -41,6 +58,11 @@ public class TokenProvider implements Serializable {
         return claimsResolver.apply(claims);
     }
 
+    /**
+     * For retrieving any information from token we will need the secret key
+     * @param token
+     * @return Claims
+     */
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
                 .setSigningKey(SIGNING_KEY)
@@ -48,11 +70,25 @@ public class TokenProvider implements Serializable {
                 .getBody();
     }
 
+    /**
+     * Checks if the token has expired
+     * @param token
+     * @return true if expired else false
+     */
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 
+    /**
+     * Generates token for user. While creating the token -
+     * 1. Define  claims of the token, like Issuer, Expiration, Subject, and the ID
+     * 2. Sign the JWT using the HS512 algorithm and secret key.
+     * 3. According to JWS Compact Serialization(https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#section-3.1)
+     *    compaction of the JWT to a URL-safe string
+     * @param authentication
+     * @return token
+     */
     public String generateToken(Authentication authentication) {
          String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -67,6 +103,12 @@ public class TokenProvider implements Serializable {
                 .compact();
     }
 
+    /**
+     * Validate token
+     * @param token
+     * @param userDetails
+     * @return true if valid else false
+     */
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));

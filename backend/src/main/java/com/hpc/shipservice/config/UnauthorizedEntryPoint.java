@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * This class will extend Spring's AuthenticationEntryPoint class and override its method commence.
+ * It rejects every unauthenticated request and send error code 401
+ * @author Shivani Vishwakarma
+ * @since 29.07.21
+ */
 
 @Component
 public class UnauthorizedEntryPoint implements AuthenticationEntryPoint, Serializable {
