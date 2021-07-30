@@ -1,7 +1,7 @@
 package com.hpc.shipservice.controller;
 
 import com.hpc.shipservice.entities.Ship;
-import com.hpc.shipservice.service.ShipService;
+import com.hpc.shipservice.service.impl.ShipServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,7 +21,7 @@ import java.util.Collection;
 public class ShipController {
 
     @Autowired
-    private ShipService shipService;
+    private ShipServiceImpl shipServiceImpl;
 
     /**
      * This is a GET api which fetches all the ship records from database and returns it to the client
@@ -29,7 +29,7 @@ public class ShipController {
      */
     @GetMapping("/getall")
     public Collection<Ship> getShips() {
-        return shipService.getShips();
+        return shipServiceImpl.getShips();
     }
 
     /**
@@ -39,7 +39,7 @@ public class ShipController {
      */
     @GetMapping("/get/{shipCode}")
     public ResponseEntity<?> getShipsByShipCode(@PathVariable("shipCode") String shipCode) {
-        return shipService.getShipByShipCode(shipCode);
+        return shipServiceImpl.getShipByShipCode(shipCode);
     }
 
     /**
@@ -48,7 +48,7 @@ public class ShipController {
      */
     @PostMapping("/add")
     public ResponseEntity<?> addNewShipInfo(@RequestBody Ship ship){
-        return shipService.addNewShipInfo(ship);
+        return shipServiceImpl.addNewShipInfo(ship);
     }
 
     /**
@@ -58,7 +58,7 @@ public class ShipController {
      */
     @PutMapping("/update")
     public ResponseEntity<?> updateShipInfo(@RequestBody Ship ship){
-        return shipService.updateShipInfo(ship);
+        return shipServiceImpl.updateShipInfo(ship);
     }
 
     /**
@@ -68,7 +68,7 @@ public class ShipController {
      */
     @DeleteMapping("/delete/{shipCode}")
     public ResponseEntity<?> deleteShipInfo(@PathVariable("shipCode") String shipCode){
-        return shipService.deleteShipInfo(shipCode);
+        return shipServiceImpl.deleteShipInfo(shipCode);
     }
 
     /**
@@ -85,6 +85,6 @@ public class ShipController {
                                                     @RequestParam(defaultValue = "0") int page,
                                                     @RequestParam(defaultValue = "2") int size,
                                                     @RequestParam(defaultValue = "id,desc") String[] sort) {
-        return shipService.getAllShipsPage(shipName,page,size,sort);
+        return shipServiceImpl.getAllShipsPage(shipName,page,size,sort);
     }
 }
