@@ -15,7 +15,7 @@ export class ShipListComponent implements OnInit {
 
   loading: boolean = true;
   ships: Ship[] = [];
-  totalRecords: number = 4;
+  totalRecords: number = 0;
 
   constructor(private shipService: ShipService,
               private toastrService: ToastrService,

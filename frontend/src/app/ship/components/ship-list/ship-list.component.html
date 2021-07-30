@@ -7,8 +7,8 @@
         <div class="col-md-12">
 
           <p-table #dt [value]="ships" dataKey="id" [rowHover]="true" [loading]="loading" sortMode="multiple"
-                   [filterDelay]="0" [rows]="2" [totalRecords]="totalRecords" [showCurrentPageReport]="true"
-                   [rowsPerPageOptions]="[2,4,6]" [pageLinks]="3"
+                   [filterDelay]="0" [rows]="5" [totalRecords]="totalRecords" [showCurrentPageReport]="true"
+                   [rowsPerPageOptions]="[5,10,15]" [pageLinks]="3"
                    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                    [globalFilterFields]="['shipName']">
 
