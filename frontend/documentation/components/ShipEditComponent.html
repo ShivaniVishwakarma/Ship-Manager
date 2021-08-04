@@ -1,0 +1,724 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ship-manager documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ship-manager documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ShipEditComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/ship/components/ship-edit/ship-edit.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-ship-edit</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./ship-edit.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./ship-edit.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#shipForm" >shipForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#editShip" >editShip</a>
+                            </li>
+                            <li>
+                                <a href="#getShip" >getShip</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, shipService: <a href="../injectables/ShipService.html" target="_self">ShipService</a>, activateRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, toastrService: ToastrService, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/ship/components/ship-edit/ship-edit.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>shipService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ShipService.html" target="_self" >ShipService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activateRoute</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>toastrService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ToastrService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editShip"></a>
+                    <span class="name">
+                        <span ><b>editShip</b></span>
+                        <a href="#editShip"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editShip(shipForm: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="50"
+                            class="link-to-prism">src/app/ship/components/ship-edit/ship-edit.component.ts:50</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>shipForm</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getShip"></a>
+                    <span class="name">
+                        <span ><b>getShip</b></span>
+                        <a href="#getShip"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getShip(shipCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/app/ship/components/ship-edit/ship-edit.component.ts:37</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>shipCode</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/app/ship/components/ship-edit/ship-edit.component.ts:32</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="shipForm"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>shipForm</b></span>
+                        <a href="#shipForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/ship/components/ship-edit/ship-edit.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
+import {FormBuilder, FormGroup, Validators} from &#x27;@angular/forms&#x27;;
+import {ActivatedRoute, Router} from &#x27;@angular/router&#x27;;
+import {ToastrService} from &#x27;ngx-toastr&#x27;;
+import {Constants} from &#x27;../../../core/constants&#x27;;
+
+import {ShipService} from &#x27;../../services/ship.service&#x27;;
+import {Ship} from &#x27;../../ship.model&#x27;;
+
+@Component({
+  selector: &#x27;app-ship-edit&#x27;,
+  templateUrl: &#x27;./ship-edit.component.html&#x27;,
+  styleUrls: [&#x27;./ship-edit.component.scss&#x27;]
+})
+export class ShipEditComponent implements OnInit {
+
+  public shipForm: FormGroup;
+
+  constructor(private fb: FormBuilder,
+              private shipService: ShipService,
+              private activateRoute: ActivatedRoute,
+              private toastrService: ToastrService,
+              private router: Router) {
+    this.shipForm &#x3D; this.fb.group({
+      shipCode: [&#x27;&#x27;, Validators.required],
+      shipName: [&#x27;&#x27;, Validators.required],
+      shipLengthInMeters: [&#x27;&#x27;, Validators.required],
+      shipWidthInMeters: [&#x27;&#x27;, Validators.required]
+    });
+  }
+
+  ngOnInit(): void {
+    this.activateRoute.params.subscribe(response &#x3D;&gt; this.getShip(response.id));
+    this.shipForm.get(&#x27;shipCode&#x27;)?.disable();
+  }
+
+  getShip(shipCode: string) {
+    this.shipService.getShip(shipCode)
+      .subscribe(response &#x3D;&gt; {
+        if (response.status) {
+          this.shipForm.patchValue(response.data);
+        } else {
+          this.toastrService.error(response.message &amp;&amp; &#x27;Error while fetching ship details&#x27;, Constants.TITLE_ERROR);
+        }
+      }, error &#x3D;&gt; {
+        this.toastrService.error(&quot;Error while updating ship details&quot;, Constants.TITLE_ERROR);
+      });
+  }
+
+  editShip(shipForm: FormGroup) {
+    if (shipForm.valid) {
+      let ship: Ship &#x3D; shipForm.getRawValue();
+      this.shipService.editShip(ship)
+        .subscribe(response &#x3D;&gt; {
+          if (response.status) {
+            this.toastrService.success(response.message, Constants.TITLE_SUCCESS);
+            this.router.navigate([&#x27;ships/list&#x27;]);
+          } else {
+            this.toastrService.error(response.message, Constants.TITLE_ERROR);
+          }
+        }, error &#x3D;&gt; {
+          this.toastrService.error(&quot;Error while updating ship details&quot;, Constants.TITLE_ERROR);
+        });
+    } else {
+      this.toastrService.error(&quot;Please fill all form fields, something is missing or invalid&quot;, Constants.TITLE_ERROR);
+    }
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container mt-9&quot;&gt;
+  &lt;div class&#x3D;&quot;row p-5&quot;&gt;
+    &lt;div class&#x3D;&quot;col-md-6&quot;&gt;&lt;/div&gt;
+    &lt;div class&#x3D;&quot;col-md-8&quot;&gt;
+      &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot;card-body&quot;&gt;
+          &lt;form [formGroup]&#x3D;&quot;shipForm&quot; (ngSubmit)&#x3D;&quot;editShip(shipForm)&quot; novalidate&gt;
+            &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+
+              &lt;div class&#x3D;&quot;row  p-2&quot;&gt;
+                &lt;div class&#x3D;&quot;col-md-4&quot;&gt;&lt;label for&#x3D;&quot;shipCode&quot; class&#x3D;&quot;field-label text-muted&quot;&gt;Ship Code&lt;/label&gt;&lt;/div&gt;
+                &lt;div class&#x3D;&quot;col-md-8&quot;&gt;
+                  &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;shipCode&quot; id&#x3D;&quot;shipCode&quot; formControlName&#x3D;&quot;shipCode&quot; class&#x3D;&quot;form-control&quot;/&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;row p-2&quot;&gt;
+                &lt;div class&#x3D;&quot;col-md-4&quot;&gt;&lt;label for&#x3D;&quot;shipName&quot; class&#x3D;&quot;field-label text-muted&quot;&gt;Name&lt;/label&gt;&lt;/div&gt;
+                &lt;div class&#x3D;&quot;col-md-8&quot;&gt;
+                  &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;shipName&quot; id&#x3D;&quot;shipName&quot; formControlName&#x3D;&quot;shipName&quot; class&#x3D;&quot;form-control&quot;
+                         placeholder&#x3D;&quot;Enter Name&quot;/&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;row p-2&quot;&gt;
+                &lt;div class&#x3D;&quot;col-md-4&quot;&gt;&lt;label for&#x3D;&quot;shipLengthInMeters&quot; class&#x3D;&quot;field-label text-muted&quot;&gt;Length&lt;/label&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;col-md-8&quot;&gt;
+                  &lt;input type&#x3D;&quot;number&quot; name&#x3D;&quot;shipLengthInMeters&quot; id&#x3D;&quot;shipLengthInMeters&quot;
+                         formControlName&#x3D;&quot;shipLengthInMeters&quot; class&#x3D;&quot;form-control&quot;
+                         placeholder&#x3D;&quot;Enter Length&quot;/&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;row p-2&quot;&gt;
+                &lt;div class&#x3D;&quot;col-md-4&quot;&gt;&lt;label for&#x3D;&quot;shipWidthInMeters&quot; class&#x3D;&quot;field-label text-muted&quot;&gt;Width&lt;/label&gt;&lt;/div&gt;
+                &lt;div class&#x3D;&quot;col-md-8&quot;&gt;
+                  &lt;input type&#x3D;&quot;number&quot; name&#x3D;&quot;shipWidthInMeters&quot; id&#x3D;&quot;shipWidthInMeters&quot;
+                         formControlName&#x3D;&quot;shipWidthInMeters&quot; class&#x3D;&quot;form-control&quot;
+                         placeholder&#x3D;&quot;Enter Width&quot;/&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;row col-md-3 center&quot;&gt;
+                &lt;button class&#x3D;&quot;btn btn-primary&quot; type&#x3D;&quot;submit&quot;&gt; Update&lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./ship-edit.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container mt-9">  <div class="row p-5">    <div class="col-md-6"></div>    <div class="col-md-8">      <div class="card">        <div class="card-body">          <form [formGroup]="shipForm" (ngSubmit)="editShip(shipForm)" novalidate>            <div class="mb-3">              <div class="row  p-2">                <div class="col-md-4"><label for="shipCode" class="field-label text-muted">Ship Code</label></div>                <div class="col-md-8">                  <input type="text" name="shipCode" id="shipCode" formControlName="shipCode" class="form-control"/>                </div>              </div>              <div class="row p-2">                <div class="col-md-4"><label for="shipName" class="field-label text-muted">Name</label></div>                <div class="col-md-8">                  <input type="text" name="shipName" id="shipName" formControlName="shipName" class="form-control"                         placeholder="Enter Name"/>                </div>              </div>              <div class="row p-2">                <div class="col-md-4"><label for="shipLengthInMeters" class="field-label text-muted">Length</label>                </div>                <div class="col-md-8">                  <input type="number" name="shipLengthInMeters" id="shipLengthInMeters"                         formControlName="shipLengthInMeters" class="form-control"                         placeholder="Enter Length"/>                </div>              </div>              <div class="row p-2">                <div class="col-md-4"><label for="shipWidthInMeters" class="field-label text-muted">Width</label></div>                <div class="col-md-8">                  <input type="number" name="shipWidthInMeters" id="shipWidthInMeters"                         formControlName="shipWidthInMeters" class="form-control"                         placeholder="Enter Width"/>                </div>              </div>              <div class="row col-md-3 center">                <button class="btn btn-primary" type="submit"> Update</button>              </div>            </div>          </form>        </div>      </div>    </div>    <div class="col-md-3"></div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ActionComponent', 'selector': 'app-actions'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'LoginComponent', 'selector': 'app-auth-login'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NoRouteFoundComponent', 'selector': 'app-no-root'},{'name': 'ShipAddComponent', 'selector': 'app-ship-add'},{'name': 'ShipComponent', 'selector': 'app-ship'},{'name': 'ShipEditComponent', 'selector': 'app-ship-edit'},{'name': 'ShipListComponent', 'selector': 'app-ship-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ShipEditComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ShipEditComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       
+       <script type="module" src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
