@@ -1,11 +1,8 @@
 package com.hpc.shipservice.service.impl;
 
-import com.hpc.shipservice.entities.Role;
 import com.hpc.shipservice.entities.User;
-import com.hpc.shipservice.entities.UserDto;
 import com.hpc.shipservice.repositories.UserRepository;
 import com.hpc.shipservice.service.RoleService;
-import com.hpc.shipservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,9 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,7 +21,7 @@ import java.util.Set;
  */
 
 @Service(value = "userService")
-public class UserServiceImpl implements UserDetailsService, UserService {
+public class UserServiceImpl implements UserDetailsService {
 
     @Autowired
     private RoleService roleService;
