@@ -64,47 +64,4 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return authorities;
     }
 
-    /**
-     * Fetches all the user in the database
-     * @return list of users
-     */
-    public List<User> findAll() {
-        List<User> list = new ArrayList<>();
-        userRepository.findAll().iterator().forEachRemaining(list::add);
-        return list;
-    }
-
-    /**
-     * Finds user by username
-     * @param username
-     * @return
-     */
-    @Override
-    public User findOne(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    /**
-     * Saves the user information in the database
-     * @param user
-     * @return
-     */
-    @Override
-    public User save(UserDto user) {
-
-        User nUser = user.getUserFromDto();
-        nUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-
-        Role role = roleService.findByName("USER");
-        Set<Role> roleSet = new HashSet<>();
-        roleSet.add(role);
-
-        if(nUser.getEmail().split("@")[1].equals("admin.edu")){
-            role = roleService.findByName("ADMIN");
-            roleSet.add(role);
-        }
-
-        nUser.setRoles(roleSet);
-        return userRepository.save(nUser);
-    }
 }
